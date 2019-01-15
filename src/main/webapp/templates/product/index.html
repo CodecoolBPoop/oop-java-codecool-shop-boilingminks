@@ -7,6 +7,7 @@
 
     <title>Codecool Shop</title>
 
+
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -31,8 +32,17 @@
 <body>
 
 <div class="jumbotron text-center">
+
+    <button type="button" class="btn btn-default btn-sm" style="float: right;">
+        <img class="" src="http://placehold.it/100x100/000/fff" th:attr="src='/static/img/shopping_cart.png'" alt="" />
+        Shopping Cart: <th:block th:text="${sum_of_items}">card</th:block>
+    </button>
+
     <h1>Codecool Shop</h1>
+
 </div>
+
+
 
 <div class="container">
     <div class="card">
