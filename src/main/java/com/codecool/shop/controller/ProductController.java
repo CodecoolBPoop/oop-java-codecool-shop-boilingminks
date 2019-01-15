@@ -31,6 +31,7 @@ public class ProductController extends HttpServlet {
         if (itemId != null ){
             shoppingCarts.update(Integer.valueOf(itemId),1);
             System.out.println(shoppingCarts.getAll());
+            System.err.println(shoppingCarts.getItemsInCarts());
         }
 
 
