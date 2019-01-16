@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,7 @@ public class ShoppingCartHTML extends HttpServlet {
 
 
         int userId = 1;
+        float sumOfPrices = 0;
         Map<Integer, Integer> userCart = shoppingCartDao.getAll().get(userId);
 
         if (stringItemId != null ){
@@ -56,6 +58,7 @@ public class ShoppingCartHTML extends HttpServlet {
 
         for (Integer key : userCart.keySet()) {
             cartData.put(productDataStore.find(key), userCart.get(key) );
+            sumOfPrices += productDataStore.find(key).getDefaultPrice() * userCart.get(key);
         }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
@@ -64,6 +67,7 @@ public class ShoppingCartHTML extends HttpServlet {
 
 
        context.setVariable("cart_data", cartData);
+       context.setVariable("sum_of_prices", sumOfPrices);
 
         engine.process("product/shoppingcart.html", context, resp.getWriter());
 
