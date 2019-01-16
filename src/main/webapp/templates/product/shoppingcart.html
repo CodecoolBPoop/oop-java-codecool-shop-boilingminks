@@ -54,34 +54,36 @@
     </tr>
     </thead>
     <tbody>
-    <div id="products" class="row mt-4">
+    <!--<div id="products" class="row mt-4">-->
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="item : ${cart_data}">
             <tr>
                 <td><p class="card-title" th:text="${item.key.name}">Product name</p></td>
                 <td><p class="lead" th:text="${item.key.getPrice()}">100 USD</p></td>
                 <td><p class="lead" th:text="${item.value}">Quantity</p></td>
                 <td th:with="result=${item.key.defaultPrice * item.value}">
-                        <span th:text="${#numbers.formatDecimal(result, 0, 2)} + ' USD'"></span>
+                    <p th:text="${#numbers.formatDecimal(result, 0, 2)} + ' USD'"></p>
                 </td>
                 <td>
                     <form action="/shoppingcart">
-                    <button class="btn btn-success" name="changeCart" type="submit" th:value="${item.key.getId()}">
-                        +
-                    </button>
-                    <button class="btn btn-success" name="changeCart" type="submit" th:with="subtractId = ${item.key.getId() * (-1)}" th:value="${subtractId}">
-                        -
-                    </button>
+                        <button class="btn btn-success" name="changeCart" type="submit" th:value="${item.key.getId()}">
+                            +
+                        </button>
+                        <button class="btn btn-success" name="changeCart" type="submit"
+                                th:with="subtractId = ${item.key.getId() * (-1)}" th:value="${subtractId}">
+                            -
+                        </button>
                     </form>
                 </td>
             </tr>
         </div>
-    </div>
+    <!--</div>-->
     </tbody>
     <tfoot>
     <tr>
-        <td>Total to pay: </td>
-        <td></td><td></td>
-        <td><p class="lead" th:text="${sum_of_prices} + 'USD'">SUM</p></td>
+        <td><h3>Total to pay: </h3></td>
+        <td></td>
+        <td></td>
+        <td><h3 class="lead" th:text="${#numbers.formatDecimal(sum_of_prices, 0, 2)} + ' USD'">SUM</h3></td>
     </tr>
     </tfoot>
 </table>
