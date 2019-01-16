@@ -42,7 +42,7 @@ public class ProductController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
 //        context.setVariables(params);
-        int userId = 1;
+        int userId = 1; // TODO : USER SYSTEM!
         context.setVariable("sum_of_items", shoppingCarts.getSumOfItems().get(userId));
         context.setVariable("recipient", "World");
         context.setVariable("products", productDataStore.getAll());
