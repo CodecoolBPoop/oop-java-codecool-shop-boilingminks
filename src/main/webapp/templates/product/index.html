@@ -41,10 +41,19 @@
             <th:block th:text="${sum_of_items}">card</th:block>
         </button>
     </form>
-    <h1>BoilingMinks Shop</h1>
+    <a href="/"><h1>BoilingMinks Shop</h1></a>
 
 </div>
 <div class="container">
+
+    <strong>Suppliers:</strong>
+    <div class="row">
+        <div class="card text-center col col-sm-12 col-md-6 col-lg-4"
+             th:each="supp, iterStat : ${suppliers}" th:value="${supp.id}">
+            <a th:href="@{/prod-by-supp(id=${supp.id})}" th:text="${supp.name}">Supplier Name</a>
+        </div>
+    </div>
+    <p></p>
     <div class="row">
         <div th:each="category: ${categories}" class="col-sm-3">
             <div class="card text-center">
@@ -63,6 +72,7 @@
                 </div>
                 <div class="card-body">
                     <div class="card-text">
+                        <p class="lead" th:text="${prod.getSupplier().getName()}">Unknown Supplier</p>
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
