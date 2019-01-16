@@ -51,7 +51,7 @@ public class ShoppingCartHTML extends HttpServlet {
                 }
             }
             else{
-                userCart.put(itemId, userCart.get(itemId) + 1);
+                shoppingCartDao.update(itemId, 1);
             }
         }
 
