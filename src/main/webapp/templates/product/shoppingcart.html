@@ -60,12 +60,12 @@
                 <td><p class="lead" th:text="${item.value}">Quantity</p></td>
                 <td><p class="lead" th:text="${item.value}">Quantity</p></td>
                 <td>
-                    <form action="shoppingcart.html">
-                    <button class="btn btn-success" name="addToCart" type="submit" th:value="${}">
-                    +
+                    <form action="/shoppingcart">
+                    <button class="btn btn-success" name="changeCart" type="submit" th:value="${item.key.getId()}">
+                        +
                     </button>
-                    <button class="btn btn-success" name="addToCart" type="submit" th:value="${}">
-                     -
+                    <button class="btn btn-success" name="changeCart" type="submit" th:with="subtractId = ${item.key.getId() * (-1)}" th:value="${subtractId}">
+                        -
                     </button>
                     </form>
                 </td>

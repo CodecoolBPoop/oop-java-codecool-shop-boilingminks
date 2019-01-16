@@ -31,12 +31,31 @@ public class ShoppingCartHTML extends HttpServlet {
 
         Map <Product, Integer> cartData = new HashMap<>();
 
+        String stringItemId = request.getParameter("changeCart");
+
+
+
         int userId = 1;
         Map<Integer, Integer> userCart = shoppingCartDao.getAll().get(userId);
 
+        if (stringItemId != null ){
+
+            Integer itemId = Integer.valueOf(stringItemId);
+            if (itemId < 0){
+                itemId = Math.abs(itemId);
+                shoppingCartDao.update(itemId, -1);
+                if (userCart.get(itemId) < 1){
+                    userCart.remove(itemId);
+                }
+            }
+            else{
+                userCart.put(itemId, userCart.get(itemId) + 1);
+            }
+        }
+
+
         for (Integer key : userCart.keySet()) {
             cartData.put(productDataStore.find(key), userCart.get(key) );
-            System.err.println(productDataStore.find(key) + " -- " + userCart.get(key));
         }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
