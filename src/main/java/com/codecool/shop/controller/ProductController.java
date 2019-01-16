@@ -30,8 +30,6 @@ public class ProductController extends HttpServlet {
 
         if (itemId != null ){
             shoppingCarts.update(Integer.valueOf(itemId),1);
-            System.out.println(shoppingCarts.getAll());
-            System.err.println(shoppingCarts.getItemsInCarts());
         }
 
 //        Map params = new HashMap<>();
@@ -44,17 +42,10 @@ public class ProductController extends HttpServlet {
         int userId = 1;
         context.setVariable("sum_of_items", shoppingCarts.getItemsInCarts().get(userId));
         context.setVariable("recipient", "World");
-
         context.setVariable("category", productCategoryDataStore.find(1));
         context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         context.setVariable("categories", productCategoryDataStore.getAll());
         context.setVariable("products", productDataStore.getAll());
-
-        /*
-        context.setVariable("products1", productDataStore.getBy(productCategoryDataStore.find(1)));
-        context.setVariable("products2", productDataStore.getBy(productCategoryDataStore.find(2)));
-        context.setVariable("products3", productDataStore.getBy(productCategoryDataStore.find(3)));
-        */
 
         engine.process("product/index.html", context, response.getWriter());
     }

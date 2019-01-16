@@ -5,7 +5,7 @@
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>BoilingMinks Shop</title>
+    <title>BoilingMinks Shop Shoppingcart</title>
 
 
     <!-- Bootstrap components -->
@@ -33,48 +33,47 @@
 
 <body>
 <div class="jumbotron text-center">
-
-    <button type="button" class="btn btn-default btn-sm" style="float: right;">
-        <img class="" src="http://placehold.it/100x100/000/fff" th:attr="src='/static/img/shopping_cart.png'" alt=""/>
-        Shopping Cart:
-        <th:block th:text="${sum_of_items}">card</th:block>
-    </button>
-
-    <h1>BoilingMinks Shop</h1>
+    <form action="index.html">
+        <button type="button" class="btn btn-default btn-sm" style="float: right;">
+            Back to the shop
+        </button>
+    </form>
+    <h1>BoilingMinks Shopping Cart</h1>
 
 </div>
-<div class="container">
-    <div class="row">
-        <div th:each="category: ${categories}" class="col-sm-3">
-            <div class="card text-center">
-                <a th:href="@{/filter(cat=${category.name})}"><strong th:text="${category.name}">Category Title</strong></a>
-            </div>
-        </div>
-    </div>
-    <div id="products" class="row mt-4">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" height="250"
-                     th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                        <form method="get" action="index.html">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Product name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>sum</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <div id="products" class="row mt-4">
+            <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+                <tr>
+                    <td><p class="card-title" th:text="${prod.name}">Product name</p></td>
+                    <td><p class="lead" th:text="${prod.getPrice()}">100 USD</p></td>
+                    <td><p class="lead" th:text="${prod.getPrice()}">Quantity</p></td>
+                    <td>SUM</td>
+                    <td>
+                        <form action="shoppingcart.html">
                             <button class="btn btn-success" name="addToCart" type="submit" th:value="${prod.getId()}">
-                                Add to cart
+                                +
+                            </button>
+                            <button class="btn btn-success" name="addToCart" type="submit" th:value="${prod.getId()}">
+                                -
                             </button>
                         </form>
-                    </div>
-                </div>
+                    </td>
+                </tr>
             </div>
         </div>
-    </div>
+        </tbody>
+    </table>
 </div>
 <div th:replace="footer.html :: copy"></div>
 </body>
