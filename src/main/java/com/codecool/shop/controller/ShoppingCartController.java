@@ -40,20 +40,10 @@ public class ShoppingCartController extends HttpServlet {
 
         if (stringItemId != null) {
 
-            Integer itemId = Integer.valueOf(stringItemId);
-            if (itemId < 0) {
-                itemId = Math.abs(itemId);
-                shoppingCartDao.update(itemId, -1);
-                if (userCart.get(itemId) < 1) {
-                    userCart.remove(itemId);
-                }
-            } else {
-                shoppingCartDao.update(itemId, 1);
-            }
+            updateCart(shoppingCartDao, stringItemId, userCart);
         }
 
         if (userCart != null) {
-
 
             for (Integer key : userCart.keySet()) {
                 cartData.put(productDao.find(key), userCart.get(key));
@@ -77,6 +67,19 @@ public class ShoppingCartController extends HttpServlet {
         }
 
 
+    }
+
+    private void updateCart(ShoppingCartDao shoppingCartDao, String stringItemId, Map<Integer, Integer> userCart) {
+        Integer itemId = Integer.valueOf(stringItemId);
+        if (itemId < 0) {
+            itemId = Math.abs(itemId);
+            shoppingCartDao.update(itemId, -1);
+            if (userCart.get(itemId) < 1) {
+                userCart.remove(itemId);
+            }
+        } else {
+            shoppingCartDao.update(itemId, 1);
+        }
     }
 
 }
