@@ -59,7 +59,7 @@
                 <td><p class="lead" th:text="${item.key.getPrice()}">100 USD</p></td>
                 <td><p class="lead" th:text="${item.value}">Quantity</p></td>
                 <td th:with="result=${item.key.defaultPrice * item.value}">
-                        <span th:text="${result} + ' USD'"></span>
+                        <span th:text="${#numbers.formatDecimal(result, 0, 2)} + ' USD'"></span>
                 </td>
             </tr>
         </div>
