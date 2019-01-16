@@ -5,7 +5,7 @@
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>BoilingMinks Shop</title>
+    <title>Choose Payment</title>
 
 
     <!-- Bootstrap components -->
@@ -45,44 +45,15 @@
 
 </div>
 <div class="container">
-    <div class="row">
-        <div th:each="supp, iterStat : ${suppliers}" th:value="${supp.id}" class="col-sm-3">
-            <div class="card text-center">
-                <a th:href="@{/prod-by-supp(id=${supp.id})}"><strong th:text="${supp.name}">Supplier Name</strong></a>
-            </div>
-        </div>
-    </div>
-    <p></p>
-    <div class="row">
-        <div th:each="category: ${categories}" class="col-sm-3">
-            <div class="card text-center">
-                <a th:href="@{/filter(cat=${category.name})}"><strong th:text="${category.name}">Category Title</strong></a>
-            </div>
-        </div>
-    </div>
-    <div id="products" class="row mt-4">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" height="250"
-                     th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                        <form method="get" action="index.html">
-                            <button class="btn btn-success" name="addToCart" type="submit" th:value="${prod.getId()}">
-                                Add to cart
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div>
+        <h3>Choose payment option:</h3><br>
+        <form action="/payment-ccard">
+            <button type="submit">Credit Card</button>
+        </form>
+        <br>
+        <form action="/payment-paypal">
+            <button type="submit">Paypal</button>
+        </form>
     </div>
 </div>
 <div th:replace="footer.html :: copy"></div>
