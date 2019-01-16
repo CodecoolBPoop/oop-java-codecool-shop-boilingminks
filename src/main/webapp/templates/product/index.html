@@ -5,7 +5,8 @@
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>Codecool Shop</title>
+    <title>BoilingMinks Shop</title>
+
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -31,11 +32,18 @@
 </head>
 
 <body>
-
 <div class="jumbotron text-center">
-    <a href="/"><h1>Codecool Shop</h1></a>
-</div>
+    <form action="/shoppingcart" method="get">
+        <button type="submit" class="btn btn-default btn-sm" style="float: right;">
+            <img class="" src="http://placehold.it/100x100/000/fff" th:attr="src='/static/img/shopping_cart.png'"
+                 alt=""/>
+            Shopping Cart:
+            <th:block th:text="${sum_of_items}">card</th:block>
+        </button>
+    </form>
+    <a href="/"><h1>BoilingMinks Shop</h1></a>
 
+</div>
 <div class="container">
 
     <div class="row">
@@ -53,12 +61,10 @@
             </div>
         </div>
     </div>
-
-
     <div id="products" class="row mt-4">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff"
+                <img class="" src="http://placehold.it/400x250/000/fff" height="250"
                      th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
                 <div class="card-header">
                     <h4 class="card-title" th:text="${prod.name}">Product name</h4>
@@ -69,16 +75,17 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <form method="get" action="index.html">
+                            <button class="btn btn-success" name="addToCart" type="submit" th:value="${prod.getId()}">
+                                Add to cart
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
-
 <div th:replace="footer.html :: copy"></div>
-
 </body>
 </html>
