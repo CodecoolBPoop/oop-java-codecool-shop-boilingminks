@@ -8,7 +8,7 @@ import java.util.Map;
 public class ShoppingCartDaoMem implements ShoppingCartDao {
     private Map<Integer, Map<Integer, Integer>> shoppingCarts = new HashMap<>();
     private static ShoppingCartDaoMem instance = null;
-    private Map<Integer, Integer> itemsInCarts = new HashMap<>();
+    private Map<Integer, Integer> sumOfItems = new HashMap<>();
 
 
     private ShoppingCartDaoMem() {
@@ -27,31 +27,31 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     }
 
     @Override
-    public Map<Integer, Integer> getItemsInCarts() {
-        return itemsInCarts;
+    public Map<Integer, Integer> getSumOfItems() {
+        return sumOfItems;
     }
 
     @Override
-    public void update(int id, int quantity) {
+    public void update(int product_id, int quantity) {
 
         int userId = 1; // CHANGE THIS!
 
         if (shoppingCarts.containsKey(userId)) {
-            itemsInCarts.put(userId, itemsInCarts.get(userId) + quantity);
+            sumOfItems.put(userId, sumOfItems.get(userId) + quantity);
 
             Map<Integer, Integer> userCart = shoppingCarts.get(userId);
 
-            if (userCart.containsKey(id)) {
-                Integer lastQuantity = userCart.get(id);
-                userCart.put(id, lastQuantity + quantity);
+            if (userCart.containsKey(product_id)) {
+                Integer lastQuantity = userCart.get(product_id);
+                userCart.put(product_id, lastQuantity + quantity);
             } else {
-                userCart.put(id, quantity);
+                userCart.put(product_id, quantity);
             }
 
         } else {
             Map<Integer, Integer> addedItem = new HashMap<>();
-            addedItem.put(id, quantity);
-            itemsInCarts.put(userId, 1);
+            addedItem.put(product_id, quantity);
+            sumOfItems.put(userId, 1);
             shoppingCarts.put(userId, addedItem);
         }
     }

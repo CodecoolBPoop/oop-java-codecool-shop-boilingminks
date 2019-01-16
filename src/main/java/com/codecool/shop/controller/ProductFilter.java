@@ -36,7 +36,7 @@ public class ProductFilter extends HttpServlet {
 
 
         int userId = 1;
-        context.setVariable("sum_of_items", shoppingCarts.getItemsInCarts().get(userId));
+        context.setVariable("sum_of_items", shoppingCarts.getAll().get(userId));
         context.setVariable("recipient", "World");
         context.setVariable("categories", productCategories.getAll());
         context.setVariable("products", products.getBy(productCategories.find(id)));
