@@ -58,16 +58,8 @@
                 <td><p class="card-title" th:text="${item.key.name}">Product name</p></td>
                 <td><p class="lead" th:text="${item.key.getPrice()}">100 USD</p></td>
                 <td><p class="lead" th:text="${item.value}">Quantity</p></td>
-                <td><p class="lead" th:text="${item.value}">Quantity</p></td>
-                <td>
-                    <form action="shoppingcart.html">
-                    <button class="btn btn-success" name="addToCart" type="submit" th:value="${}">
-                    +
-                    </button>
-                    <button class="btn btn-success" name="addToCart" type="submit" th:value="${}">
-                     -
-                    </button>
-                    </form>
+                <td th:with="result=${item.key.defaultPrice * item.value}">
+                        <span th:text="${result} + ' USD'"></span>
                 </td>
             </tr>
         </div>
@@ -75,8 +67,9 @@
     </tbody>
     <tfoot>
     <tr>
-        <td>Total</td>
-        <td> SUM OF ALL</td>
+        <td>Total to pay: </td>
+        <td></td><td></td>
+        <td><p class="lead" th:text="${sum_of_prices} + 'USD'">SUM</p></td>
     </tr>
     </tfoot>
 </table>
