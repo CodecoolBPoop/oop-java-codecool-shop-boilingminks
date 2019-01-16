@@ -23,54 +23,59 @@ import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/shoppingcart"})
-public class ShoppingCartHTML extends HttpServlet {
+public class ShoppingCartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
         ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
         ProductDao productDataStore = ProductDaoMem.getInstance();
 
-        Map <Product, Integer> cartData = new HashMap<>();
+        Map<Product, Integer> cartData = new HashMap<>();
 
         String stringItemId = request.getParameter("changeCart");
-
 
 
         int userId = 1;
         float sumOfPrices = 0;
         Map<Integer, Integer> userCart = shoppingCartDao.getAll().get(userId);
 
-        if (stringItemId != null ){
+        if (stringItemId != null) {
 
             Integer itemId = Integer.valueOf(stringItemId);
-            if (itemId < 0){
+            if (itemId < 0) {
                 itemId = Math.abs(itemId);
                 shoppingCartDao.update(itemId, -1);
-                if (userCart.get(itemId) < 1){
+                if (userCart.get(itemId) < 1) {
                     userCart.remove(itemId);
                 }
-            }
-            else{
+            } else {
                 shoppingCartDao.update(itemId, 1);
             }
         }
 
+        if (!cartData.isEmpty()) {
 
-        for (Integer key : userCart.keySet()) {
-            cartData.put(productDataStore.find(key), userCart.get(key) );
-            sumOfPrices += productDataStore.find(key).getDefaultPrice() * userCart.get(key);
+
+            for (Integer key : userCart.keySet()) {
+                cartData.put(productDataStore.find(key), userCart.get(key));
+                sumOfPrices += productDataStore.find(key).getDefaultPrice() * userCart.get(key);
+            }
+
+            TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
+            WebContext context = new WebContext(request, resp, request.getServletContext());
+
+
+            context.setVariable("cart_data", cartData);
+            context.setVariable("sum_of_prices", sumOfPrices);
+
+            engine.process("product/shoppingcart.html", context, resp.getWriter());
+        } else {
+
+            TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
+            WebContext context = new WebContext(request, resp, request.getServletContext());
+            engine.process("product/shoppingcart.html", context, resp.getWriter());
+
         }
-
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
-        WebContext context = new WebContext(request, resp, request.getServletContext());
-
-
-
-       context.setVariable("cart_data", cartData);
-       context.setVariable("sum_of_prices", sumOfPrices);
-
-        engine.process("product/shoppingcart.html", context, resp.getWriter());
-
 
 
     }
