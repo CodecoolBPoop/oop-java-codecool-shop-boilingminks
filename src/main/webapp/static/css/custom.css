@@ -60,3 +60,11 @@
 {
     margin: 0 0 11px;
 }
+
+.jumbotron
+{
+    background-image: url('../img/head_backgnd.jpg');
+    height: 280px;
+    background-repeat: no-repeat;
+    background-size: 100% 280px;
+    }
