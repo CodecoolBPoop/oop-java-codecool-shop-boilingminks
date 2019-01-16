@@ -28,14 +28,13 @@ public class ShoppingCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
         ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductDao productDao = ProductDaoMem.getInstance();
 
         Map<Product, Integer> cartData = new HashMap<>();
 
         String stringItemId = request.getParameter("changeCart");
 
-
-        int userId = 1;
+        int userId = 1; // TODO: USER SYSTEM
         float sumOfPrices = 0;
         Map<Integer, Integer> userCart = shoppingCartDao.getAll().get(userId);
 
@@ -53,12 +52,12 @@ public class ShoppingCartController extends HttpServlet {
             }
         }
 
-        if (!cartData.isEmpty()) {
+        if (userCart != null) {
 
 
             for (Integer key : userCart.keySet()) {
-                cartData.put(productDataStore.find(key), userCart.get(key));
-                sumOfPrices += productDataStore.find(key).getDefaultPrice() * userCart.get(key);
+                cartData.put(productDao.find(key), userCart.get(key));
+                sumOfPrices += productDao.find(key).getDefaultPrice() * userCart.get(key);
             }
 
             TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
