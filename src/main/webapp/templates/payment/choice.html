@@ -41,16 +41,17 @@
             <th:block th:text="${sum_of_items}">card</th:block>
         </button>
     </form>
-    <a href="/"><h1>Please choose Payment type</h1></a>
+    <a href="/"><h1>BoilingMinks Shop</h1></a>
 
 </div>
 <div class="container">
     <div>
-        <form action="/ccard">
+        <h3>Choose payment option:</h3><br>
+        <form action="/payment-ccard">
             <button type="submit">Credit Card</button>
         </form>
         <br>
-        <form action="/paypal">
+        <form action="/payment-paypal">
             <button type="submit">Paypal</button>
         </form>
     </div>
