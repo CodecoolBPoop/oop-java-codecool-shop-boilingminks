@@ -33,13 +33,14 @@
 
 <body>
 <div class="jumbotron text-center">
-
-    <button type="button" class="btn btn-default btn-sm" style="float: right;">
-        <img class="" src="http://placehold.it/100x100/000/fff" th:attr="src='/static/img/shopping_cart.png'" alt=""/>
-        Shopping Cart:
-        <th:block th:text="${sum_of_items}">card</th:block>
-    </button>
-
+    <form action="/shoppingcart" method="get">
+        <button type="submit" class="btn btn-default btn-sm" style="float: right;">
+            <img class="" src="http://placehold.it/100x100/000/fff" th:attr="src='/static/img/shopping_cart.png'"
+                 alt=""/>
+            Shopping Cart:
+            <th:block th:text="${sum_of_items}">card</th:block>
+        </button>
+    </form>
     <h1>BoilingMinks Shop</h1>
 
 </div>
