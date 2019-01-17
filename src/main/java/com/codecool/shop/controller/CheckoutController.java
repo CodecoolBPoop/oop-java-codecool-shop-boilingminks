@@ -62,6 +62,7 @@ public class CheckoutController extends HttpServlet {
         user.updateWithCheckout(checkoutData);
         Order order = new Order();
         order.setUser(user);
+        order.saveToJson();
         resp.sendRedirect("/payment-choice");
 
     }
