@@ -77,5 +77,10 @@
 }
 
 body{
-    background-color: mediumseagreen;
+    background-color: #4CAF50;
+}
+
+.cart{
+    color: red;
+    font-weight: bold;
 }
