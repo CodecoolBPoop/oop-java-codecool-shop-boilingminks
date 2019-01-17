@@ -35,51 +35,67 @@
 <div class="jumbotron text-center">
     <form action="/">
         <button type="submit" class="btn btn-default btn-sm" style="float: right;">
+            <img class="" src="http://placehold.it/100x100/000/fff" th:attr="src='/static/img/shop.png'"
+                 alt=""/>
             Back to the shop
         </button>
     </form>
-    <h1>BoilingMinks Shopping Cart</h1>
+    <a href="/"><h1>BoilingMinks Shop</h1></a>
 
 </div>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Product name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>sum</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <div id="products" class="row mt-4">
-            <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-                <tr>
-                    <td><p class="card-title" th:text="${prod.name}">Product name</p></td>
-                    <td><p class="lead" th:text="${prod.getPrice()}">100 USD</p></td>
-                    <td><p class="lead" th:text="${prod.getPrice()}">Quantity</p></td>
-                    <td>SUM</td>products
-                    <td>
-                        <form action="shoppingcart.html">
-                            <button class="btn btn-success" name="addToCart" type="submit" th:value="${prod.getId()}">
-                                +
-                            </button>
-                            <button class="btn btn-success" name="addToCart" type="submit" th:value="${prod.getId()}">
-                                -
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            </div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Product name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sum Price</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <div id="products" class="row mt-4">
+        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="item : ${cart_data}">
+            <tr>
+                <td><p class="card-title" th:text="${item.key.name}">Product name</p></td>
+                <td><p class="lead" th:text="${item.key.getPrice()}">100 USD</p></td>
+                <td><p class="lead" th:text="${item.value}">Quantity</p></td>
+                <td th:with="result=${item.key.defaultPrice * item.value}">
+                    <p th:text="${#numbers.formatDecimal(result, 0, 2)} + ' USD'"></p>
+                </td>
+                <td>
+                    <form action="/shoppingcart">
+                        <button class="btn btn-success" name="changeCart" type="submit" th:value="${item.key.getId()}">
+                            +
+                        </button>
+                        <button class="btn btn-success" name="changeCart" type="submit"
+                                th:with="subtractId = ${item.key.getId() * (-1)}" th:value="${subtractId}">
+                            -
+                        </button>
+                    </form>
+                </td>
+            </tr>
         </div>
-        </tbody>
-    </table>
+    </div>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td><h3>Total to pay: </h3></td>
+        <td></td>
+        <td></td>
+        <td><h3 class="lead" th:text="${#numbers.formatDecimal(sum_of_prices, 0, 2)} + ' USD'">SUM</h3></td>
+    </tr>
+    </tfoot>
+</table>
+</div>
 
 <div>
     <form action="payment-choice">
         <button type="submit">Continue to Checkout</button>
     </form>
 </div>
+
+
 <div th:replace="footer.html :: copy"></div>
 </body>
 </html>

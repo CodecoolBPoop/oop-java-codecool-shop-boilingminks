@@ -24,8 +24,11 @@ public class PaymentChoice extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ShoppingCartDao shoppingCarts = ShoppingCartDaoMem.getInstance();
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
+        int userId = 1; // TODO: USER SYSTEM!
+        context.setVariable("sum_of_items", shoppingCarts.getSumOfItems().get(userId));
         engine.process("payment/choice.html", context, response.getWriter());
     }
 
