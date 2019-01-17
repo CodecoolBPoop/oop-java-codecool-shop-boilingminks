@@ -54,7 +54,7 @@
     </tr>
     </thead>
     <tbody>
-    <!--<div id="products" class="row mt-4">-->
+    <div id="products" class="row mt-4">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="item : ${cart_data}">
             <tr>
                 <td><p class="card-title" th:text="${item.key.name}">Product name</p></td>
@@ -76,7 +76,7 @@
                 </td>
             </tr>
         </div>
-    <!--</div>-->
+    </div>
     </tbody>
     <tfoot>
     <tr>
