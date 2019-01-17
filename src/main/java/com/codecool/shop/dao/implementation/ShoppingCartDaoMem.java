@@ -20,6 +20,10 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
         }
         return instance;
     }
+    @Override
+    public Map<Integer, Map<Integer, Integer>> emptyShoppingCart(){
+        shoppingCarts.clear();
+        return shoppingCarts;}
 
     @Override
     public Map<Integer, Map<Integer, Integer>> getAll() {
