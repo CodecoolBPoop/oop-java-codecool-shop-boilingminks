@@ -61,6 +61,8 @@ public class CheckoutController extends HttpServlet {
         User user = new User();
         user.updateWithCheckout(checkoutData);
 
+        Emailer.mailTo(email, firstName);
+
     }
 
 

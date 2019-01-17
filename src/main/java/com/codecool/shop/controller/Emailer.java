@@ -1,4 +1,13 @@
 package com.codecool.shop.controller;
+import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.implementation.OrderDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.model.Product;
+
+import java.util.Map;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -8,16 +17,25 @@ public class Emailer {
     private static final String USER_NAME = "testmann689";
     private static final String PASSWORD = "asdasdasd#123";
 
-    public static void mailTo(String recipient) {
-        String name = "";
+    public static void mailTo(String email, String name) {
+        // DATA
+        int userId = 1; // TODO: USER SYSTEM!
+        Map<Integer, Integer>  userCart = ShoppingCartDaoMem.getInstance().getAll().get(userId);
+        ProductDao productDaoMem = ProductDaoMem.getInstance();
 
         String from = USER_NAME;
         String pass = PASSWORD;
-        String[] to = { recipient };
+        String[] to = { email };
         String subject = "Java send mail example";
         String body = "Dear " + name + ",\n"
                 + "You have successfully bought the following items from our store:\n";
 
+        for (Integer key : userCart.keySet()) {
+            Product product = productDaoMem.find(key);
+            body = body.concat(userCart.get(key) + " " + product.getName() + "\n");
+        }
+
+        body = body.concat("\nThank you for using our website!\n\nYours sincerely,\nBoiling Minks web shop");
 
         sendFromGMail(from, pass, to, subject, body);
     }
