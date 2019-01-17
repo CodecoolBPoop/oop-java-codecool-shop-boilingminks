@@ -11,18 +11,7 @@ import java.util.HashMap;
 
 public class Order {
     private int id;
-    private int userId;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String address;
-    private String address2;
-    private String state;
-    private String zip;
-    private String country;
-    private String shipping;
-    private String saveInfo;
-
+    private User user;
 
     public Order() {
     }
@@ -35,18 +24,7 @@ public class Order {
         this.id = id;
     }
 
-    public void updateWithCheckout(HashMap<String, String> checkoutData) {
-        this.firstName = checkoutData.get("firstName");
-        this.lastName = checkoutData.get("lastName");
-        this.email = checkoutData.get("email");
-        this.address = checkoutData.get("address");
-        this.address2 = checkoutData.get("address2");
-        this.state = checkoutData.get("state");
-        this.zip = checkoutData.get("zip");
-        this.country = checkoutData.get("country");
-        this.shipping = checkoutData.get("shipping");
-        this.saveInfo = checkoutData.get("saveInfo");
-    }
+
 
     public void saveToJson() throws IOException {
         String filepath = "./src/main/webapp/json/data.json";

@@ -8,6 +8,7 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -36,7 +37,6 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.printf("We did a post on the checkout page!%n");
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String email = req.getParameter("email");
@@ -58,11 +58,8 @@ public class CheckoutController extends HttpServlet {
         checkoutData.put("country", country);
         checkoutData.put("shipping", shipping);
         checkoutData.put("saveInfo", saveInfo);
-        Order order = new Order();
-        order.updateWithCheckout(checkoutData);
-        order.saveToJson();
-
-
+        User user = new User();
+        user.updateWithCheckout(checkoutData);
 
     }
 
