@@ -83,3 +83,8 @@ span.price {
         margin-bottom: 20px;
     }
 }
+
+.cart{
+    color: red;
+    font-weight: bold;
+}

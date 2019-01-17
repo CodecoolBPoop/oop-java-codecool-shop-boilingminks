@@ -1,6 +1,8 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -18,6 +20,11 @@ public class PaymentCCard extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
+        int userId = 1; // TODO : USER SYSTEM!
+        ShoppingCartDao shoppingCarts = ShoppingCartDaoMem.getInstance();
+        context.setVariable("sum_of_items", shoppingCarts.getSumOfItems().get(userId));
+
+
         engine.process("payment/ccard.html", context, response.getWriter());
     }
 
