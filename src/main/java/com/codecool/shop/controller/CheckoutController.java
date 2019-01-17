@@ -7,6 +7,7 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Order;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.RequestWrapper;
 import java.io.IOException;
+import java.util.HashMap;
 
 @WebServlet(urlPatterns = "/checkout")
 public class CheckoutController extends HttpServlet {
@@ -45,7 +47,21 @@ public class CheckoutController extends HttpServlet {
         String country = req.getParameter("country");
         String shipping = req.getParameter("shipping");
         String saveInfo = req.getParameter("saveInfo");
-        System.out.printf("%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n", firstName, lastName, email, address, address2, state, zip, country, shipping, saveInfo);
+        HashMap<String, String> checkoutData = new HashMap<>();
+        checkoutData.put("firstName", firstName);
+        checkoutData.put("lastName", lastName);
+        checkoutData.put("email", email);
+        checkoutData.put("address", address);
+        checkoutData.put("address2", address2);
+        checkoutData.put("state", state);
+        checkoutData.put("zip", zip);
+        checkoutData.put("country", country);
+        checkoutData.put("shipping", shipping);
+        checkoutData.put("saveInfo", saveInfo);
+        Order order = new Order();
+        order.updateWithCheckout(checkoutData);
+        order.saveToJson();
+
 
 
     }
