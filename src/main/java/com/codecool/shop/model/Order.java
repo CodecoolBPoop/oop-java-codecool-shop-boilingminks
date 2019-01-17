@@ -24,7 +24,9 @@ public class Order {
         this.id = id;
     }
 
-
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public void saveToJson() throws IOException {
         String filepath = "./src/main/webapp/json/data.json";
