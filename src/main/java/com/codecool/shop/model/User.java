@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User {
-    private static int id;
+    private final int id = 1; // TODO: USER SYSTEM!
     private String firstName;
     private String lastName;
     private String email;
@@ -21,8 +21,10 @@ public class User {
     private String saveInfo;
 
     public User() {
-        this.id = id;
-        id++;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void updateWithCheckout(HashMap<String, String> checkoutData) {
