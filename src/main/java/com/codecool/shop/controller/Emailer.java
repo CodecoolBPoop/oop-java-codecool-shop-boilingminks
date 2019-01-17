@@ -25,8 +25,13 @@ public class Emailer {
 
         String from = USER_NAME;
         String pass = PASSWORD;
+
+        if (email.equals("")){
+            email = "a@gmail.com";
+        }
+
         String[] to = { email };
-        String subject = "Java send mail example";
+        String subject = "Your purchase";
         String body = "Dear " + name + ",\n"
                 + "You have successfully bought the following items from our store:\n";
 
