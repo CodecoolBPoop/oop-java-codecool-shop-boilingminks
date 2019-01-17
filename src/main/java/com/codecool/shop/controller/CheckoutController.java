@@ -7,6 +7,8 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Order;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.RequestWrapper;
 import java.io.IOException;
+import java.util.HashMap;
 
 @WebServlet(urlPatterns = "/checkout")
 public class CheckoutController extends HttpServlet {
@@ -34,7 +37,6 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.printf("We did a post on the checkout page!%n");
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String email = req.getParameter("email");
@@ -45,8 +47,19 @@ public class CheckoutController extends HttpServlet {
         String country = req.getParameter("country");
         String shipping = req.getParameter("shipping");
         String saveInfo = req.getParameter("saveInfo");
-        System.out.printf("%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n", firstName, lastName, email, address, address2, state, zip, country, shipping, saveInfo);
-
+        HashMap<String, String> checkoutData = new HashMap<>();
+        checkoutData.put("firstName", firstName);
+        checkoutData.put("lastName", lastName);
+        checkoutData.put("email", email);
+        checkoutData.put("address", address);
+        checkoutData.put("address2", address2);
+        checkoutData.put("state", state);
+        checkoutData.put("zip", zip);
+        checkoutData.put("country", country);
+        checkoutData.put("shipping", shipping);
+        checkoutData.put("saveInfo", saveInfo);
+        User user = new User();
+        user.updateWithCheckout(checkoutData);
 
     }
 
