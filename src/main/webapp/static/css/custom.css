@@ -89,3 +89,10 @@ body{
     color: #4CAF50;
     font-weight: bold;
 }
+
+#animate{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background-image: url("/static/img/minkan.png");
+}
