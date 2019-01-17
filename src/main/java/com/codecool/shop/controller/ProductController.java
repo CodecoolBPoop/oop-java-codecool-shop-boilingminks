@@ -9,6 +9,7 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
@@ -29,11 +32,7 @@ public class ProductController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         ShoppingCartDao shoppingCarts = ShoppingCartDaoMem.getInstance();
 
-        String itemId = request.getParameter("addToCart");
 
-        if (itemId != null ){
-            shoppingCarts.update(Integer.valueOf(itemId),1);
-        }
 
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
@@ -51,6 +50,26 @@ public class ProductController extends HttpServlet {
         context.setVariable("suppliers", supplierDataStore.getAll());
 
         engine.process("product/index.html", context, response.getWriter());
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
+
+        String stringItemId = req.getParameter("changeCart");
+        int userId = 1; // TODO: USER SYSTEM
+
+        Map<Integer, Integer> userCart = shoppingCartDao.getAll().get(userId);
+
+        if (stringItemId != null) {
+            ShoppingCartController.updateCart(shoppingCartDao, stringItemId, userCart);
+        }
+
+        resp.sendRedirect("/");
+
+
+
     }
 
 }

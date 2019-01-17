@@ -69,7 +69,7 @@ public class ShoppingCartController extends HttpServlet {
 
     }
 
-    private void updateCart(ShoppingCartDao shoppingCartDao, String stringItemId, Map<Integer, Integer> userCart) {
+    public static void updateCart(ShoppingCartDao shoppingCartDao, String stringItemId, Map<Integer, Integer> userCart) {
         Integer itemId = Integer.valueOf(stringItemId);
         if (itemId < 0) {
             itemId = Math.abs(itemId);
@@ -82,4 +82,20 @@ public class ShoppingCartController extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
+
+        String stringItemId = req.getParameter("changeCart");
+        int userId = 1; // TODO: USER SYSTEM
+
+        Map<Integer, Integer> userCart = shoppingCartDao.getAll().get(userId);
+
+        if (stringItemId != null) {
+            ShoppingCartController.updateCart(shoppingCartDao, stringItemId, userCart);
+        }
+
+        resp.sendRedirect("/shoppingcart");
+    }
 }
