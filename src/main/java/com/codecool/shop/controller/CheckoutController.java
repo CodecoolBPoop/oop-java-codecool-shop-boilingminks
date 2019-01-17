@@ -59,9 +59,9 @@ public class CheckoutController extends HttpServlet {
         checkoutData.put("shipping", shipping);
         checkoutData.put("saveInfo", saveInfo);
         User user = new User();
-        user.updateWithCheckout(checkoutData);
-        Order order = new Order();
-        order.setUser(user);
+        Order.updateWithCheckout(checkoutData,user);
+        Order.currentOrder = new Order();
+        Order.currentOrder.setUser(user);
         resp.sendRedirect("/payment-choice");
 
     }

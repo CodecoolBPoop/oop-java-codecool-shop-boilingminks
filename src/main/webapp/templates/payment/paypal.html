@@ -38,14 +38,14 @@
 <div class="row">
     <div class="col-75">
         <div class="container">
-            <form action="/payment_validation.html">
-
+            <form action="/payment-validation" method="post">
+                <input type="hidden" value="paypal" name="choice">
                 <div class="row">
                     <div class="col-50">
                         <h3>Payment</h3>
                         <label for="username">Username</label>
                         <input type="text" id="username" name="username" placeholder="john1234">
-                        <label for="password">Credit card number</label>
+                        <label for="password">Password</label>
                         <input type="password" id="password" name="password" placeholder="********">
                     </div>
 

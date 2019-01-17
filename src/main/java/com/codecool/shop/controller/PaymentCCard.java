@@ -21,4 +21,7 @@ public class PaymentCCard extends HttpServlet {
         engine.process("payment/ccard.html", context, response.getWriter());
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    }
 }

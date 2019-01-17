@@ -46,8 +46,9 @@ public class ShoppingCartController extends HttpServlet {
         if (userCart != null) {
 
             for (Integer key : userCart.keySet()) {
-                cartData.put(productDao.find(key), userCart.get(key));
-                sumOfPrices += productDao.find(key).getDefaultPrice() * userCart.get(key);
+                Integer quant = userCart.get(key);
+                cartData.put(productDao.find(key), quant);
+                sumOfPrices += productDao.find(key).getDefaultPrice() * quant;
             }
 
             TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
