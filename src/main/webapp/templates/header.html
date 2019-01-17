@@ -4,11 +4,17 @@
 <div th:fragment="copy">
     <div class="jumbotron text-center">
         <form action="/shoppingcart" method="get">
-            <button type="submit" class="btn btn-default btn-sm" style="float: right;">
+            <button type="submit" class="btn btn-default btn-lg" style="float: right;">
                 <img class="" src="http://placehold.it/100x100/000/fff" th:attr="src='/static/img/shopping_cart.png'"
                      alt=""/>
-                Shopping Cart:
-                <th:block th:text="${sum_of_items}">card</th:block>
+                <div th:if="${sum_of_items>0}">
+                    <p class="cart">
+                        <th:block th:text="${sum_of_items}">cart</th:block> item(s) in cart
+                    </p>
+                </div>
+                <div th:unless="${sum_of_items}">
+                    <p><b>Cart is Empty</b></p>
+                </div>
             </button>
         </form>
         <a href="/"><h1>BoilingMinks Shop</h1></a>

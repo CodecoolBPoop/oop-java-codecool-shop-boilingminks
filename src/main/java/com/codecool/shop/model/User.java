@@ -27,19 +27,4 @@ public class User {
         return id;
     }
 
-    public void updateWithCheckout(HashMap<String, String> checkoutData) {
-        this.firstName = checkoutData.get("firstName");
-        this.lastName = checkoutData.get("lastName");
-        this.email = checkoutData.get("email");
-        this.address = checkoutData.get("address");
-        this.address2 = checkoutData.get("address2");
-        this.state = checkoutData.get("state");
-        this.zip = checkoutData.get("zip");
-        this.country = checkoutData.get("country");
-        this.shipping = checkoutData.get("shipping");
-        this.saveInfo = checkoutData.get("saveInfo");
-        Gson gson = new Gson();
-        System.out.printf("%s%n", gson.toJson(this));
-
-    }
 }

@@ -39,13 +39,15 @@
     <div>
         <h3>Choose payment option:</h3><br>
         <form action="/payment-ccard">
-            <button type="submit">Credit Card</button>
+            <button class="btn btn-info" type="submit">Credit Card</button>
         </form>
         <br>
         <form action="/payment-paypal">
-            <button type="submit">Paypal</button>
+            <button class="btn btn-warning" type="submit">Paypal</button>
         </form>
     </div>
+    <p></p>
+    <p></p>
 </div>
 <div th:replace="footer.html :: copy"></div>
 </body>

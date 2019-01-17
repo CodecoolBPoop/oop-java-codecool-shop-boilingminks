@@ -59,14 +59,12 @@ public class CheckoutController extends HttpServlet {
         checkoutData.put("shipping", shipping);
         checkoutData.put("saveInfo", saveInfo);
         User user = new User();
-        user.updateWithCheckout(checkoutData);
-        Order order = new Order();
-        order.setUser(user);
-        order.setShoppingCart(user.getId());
-        resp.sendRedirect("/payment-choice");
-        order.saveToJson();
-
+        Order.updateWithCheckout(checkoutData,user);
+        Order.currentOrder = new Order();
+        Order.currentOrder.setUser(user);
+        Order.currentOrder.setShoppingCart(user.getId());
         Emailer.mailTo(email, firstName);
+        resp.sendRedirect("/payment-choice");
 
     }
 
