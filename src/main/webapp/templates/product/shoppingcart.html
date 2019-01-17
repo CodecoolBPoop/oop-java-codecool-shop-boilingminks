@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="icon" href="static/img/favico.png" type="image/x-icon"/>
     <meta charset="utf-8"/>
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -33,14 +34,14 @@
 
 <body>
 <div class="jumbotron text-center">
+
     <form action="/">
         <button type="submit" class="btn btn-default btn-sm" style="float: right;">
             <img class="" src="http://placehold.it/100x100/000/fff" th:attr="src='/static/img/shop.png'"
                  alt=""/>
-            <p><b>Back to the shop</b></p>
+            <p><b class="emptycart">Back to the shop</b></p>
         </button>
     </form>
-    <a href="/"><h1>BoilingMinks Shop</h1></a>
 
 </div>
 <table class="table table-light table-hover">
