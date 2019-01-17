@@ -60,6 +60,9 @@ public class CheckoutController extends HttpServlet {
         checkoutData.put("saveInfo", saveInfo);
         User user = new User();
         user.updateWithCheckout(checkoutData);
+        Order order = new Order();
+        order.setUser(user);
+        resp.sendRedirect("/payment-choice");
 
         Emailer.mailTo(email, firstName);
 

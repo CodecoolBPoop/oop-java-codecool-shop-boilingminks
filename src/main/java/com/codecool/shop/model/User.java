@@ -1,5 +1,9 @@
 package com.codecool.shop.model;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +36,8 @@ public class User {
         this.country = checkoutData.get("country");
         this.shipping = checkoutData.get("shipping");
         this.saveInfo = checkoutData.get("saveInfo");
+        Gson gson = new Gson();
+        System.out.printf("%s%n", gson.toJson(this));
 
     }
 }

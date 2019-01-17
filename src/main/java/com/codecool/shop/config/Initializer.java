@@ -51,5 +51,10 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Cadbury", 3, "USD", "Cadbury Dairy Milk will launch new mint and peanut butter-flavoured Oreo bars this month, in a bid to recruit young adults to the tablets category.", snack, mondelez));
         productDataStore.add(new Product("Peanut Puffs", 2, "USD", "LOW Fat, LOW Sugar, HIGH Protein, HIGH Fiber - Made with all natural ingredients", snack, mondelez));
         productDataStore.add(new Product("Snickers Mini Cubes", 4, "USD", "Yumm yumm!!", snack, mondelez));
+        productDataStore.add(new Product("8.5 Ultra LCD Writing Tablet Pen Writing Drawing Memo Message Boogie Board YT", 7, "USD", "Mild color, no harm to your eyes, no radiation." +
+                "Pressure sensitive, easy to use and play." +
+                "Clear screen with just one button." +
+                "Ultra thin and lightweight design, convenient to carry." +
+                "Suitable for writing and drawing, home message, etc.", tablet, mondelez));
     }
 }
