@@ -84,7 +84,14 @@
         <td><h3>Total to pay: </h3></td>
         <td></td>
         <td></td>
-        <td><h3 class="lead" th:text="${#numbers.formatDecimal(sum_of_prices, 0, 2)} + ' USD'">SUM</h3></td>
+        <td>
+            <div th:if="${sum_of_prices != null}">
+                <h3 class="lead" th:text="${#numbers.formatDecimal(sum_of_prices, 0, 2)} + ' USD'">SUM</h3>
+            </div>
+            <div th:unless="${sum_of_prices}">
+                <h4h3 class="lead" th:text="${#numbers.formatDecimal(0, 0, 2)} + ' USD'"> SUM</h4h3></h4>
+            </div>
+        </td>
     </tr>
     </tfoot>
 </table>
