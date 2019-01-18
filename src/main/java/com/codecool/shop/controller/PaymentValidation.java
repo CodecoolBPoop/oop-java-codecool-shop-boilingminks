@@ -15,12 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet(urlPatterns = {"/payment-validation"})
 public class PaymentValidation extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
         HashMap<String, String> checkoutData = new HashMap<>();
         req.getParameterMap().entrySet().stream().forEach(e -> {
             checkoutData.put(e.getKey(), req.getParameter(e.getKey()));
@@ -29,6 +32,10 @@ public class PaymentValidation extends HttpServlet {
         Order.updateWithCheckout(checkoutData, tran);
         Order.currentOrder.setTransaction(tran);
         Order.currentOrder.saveToJson();
+
+        Order.currentOrder.getShoppingCart().clear();
+        ShoppingCartDaoMem.getInstance().getSumOfItems().clear();
+
         resp.sendRedirect("/");
 
     }

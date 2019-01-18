@@ -64,4 +64,8 @@ public class Order {
     }
 
     public void setTransaction(Transaction tran) { this.transaction = tran; }
+
+    public Map<Integer, Integer> getShoppingCart() {
+        return shoppingCart;
+    }
 }

@@ -8,4 +8,5 @@ public interface ShoppingCartDao {
 
     Map<Integer, Map<Integer, Integer>> getAll();
     Map<Integer, Integer> getSumOfItems();
+
 }
