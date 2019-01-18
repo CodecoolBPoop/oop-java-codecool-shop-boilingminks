@@ -63,7 +63,6 @@ public class CheckoutController extends HttpServlet {
         Order.currentOrder = new Order();
         Order.currentOrder.setUser(user);
         Order.currentOrder.setShoppingCart(user.getId());
-        Emailer.mailTo(email, firstName);
         resp.sendRedirect("/payment-choice");
 
     }

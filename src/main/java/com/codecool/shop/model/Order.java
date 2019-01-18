@@ -24,6 +24,10 @@ public class Order {
     public Order() {
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public int getId() {
         return id;
     }

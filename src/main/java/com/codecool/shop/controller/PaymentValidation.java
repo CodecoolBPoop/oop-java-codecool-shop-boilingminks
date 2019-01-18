@@ -29,6 +29,17 @@ public class PaymentValidation extends HttpServlet {
         Order.updateWithCheckout(checkoutData, tran);
         Order.currentOrder.setTransaction(tran);
         Order.currentOrder.saveToJson();
+
+        try{
+        String email = Order.currentOrder.getUser().getEmail();
+        String firstName = Order.currentOrder.getUser().getFirstName();
+
+        Emailer.mailTo(email, firstName);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         resp.sendRedirect("/");
 
     }
