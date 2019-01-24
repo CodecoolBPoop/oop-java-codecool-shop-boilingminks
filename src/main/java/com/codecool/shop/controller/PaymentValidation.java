@@ -22,6 +22,7 @@ public class PaymentValidation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        int userId = 1; // TODO: USER SYSTEM!
 
         HashMap<String, String> checkoutData = new HashMap<>();
         req.getParameterMap().entrySet().stream().forEach(e -> {
@@ -33,10 +34,10 @@ public class PaymentValidation extends HttpServlet {
         Order.currentOrder.saveToJson();
 
         try{
-        String email = Order.currentOrder.getUser().getEmail();
-        String firstName = Order.currentOrder.getUser().getFirstName();
+            String email = Order.currentOrder.getUser().getEmail();
+            String firstName = Order.currentOrder.getUser().getFirstName();
 
-        Emailer.mailTo(email, firstName);
+            Emailer.mailTo(email, firstName);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -44,6 +45,7 @@ public class PaymentValidation extends HttpServlet {
 
         Order.currentOrder.getShoppingCart().clear();
         ShoppingCartDaoMem.getInstance().getSumOfItems().clear();
+        ShoppingCartDaoMem.getInstance().getSumOfItems().put(userId, 0);
 
         resp.sendRedirect("/");
 
