@@ -74,7 +74,9 @@
                     <div class="card-text">
                         <form method="post" action="/">
                             <button class="btn btn-success" name="changeCart" type="submit" th:value="${prod.getId()}">
-                                Add to cart
+                                <div class="fa-2x">
+                                    <i class="fas fa-cart-plus"></i>
+                                </div>
                             </button>
                         </form>
                     </div>

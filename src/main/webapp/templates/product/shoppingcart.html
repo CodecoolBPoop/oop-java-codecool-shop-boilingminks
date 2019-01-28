@@ -74,15 +74,18 @@
                     <p th:text="${#numbers.formatDecimal(result, 0, 2)} + ' USD'"></p>
                 </td>
                 <td>
-                    <form action="/shoppingcart" method="post">
-                        <button class="btn btn-success" name="changeCart" type="submit" th:value="${item.key.getId()}">
-                            +
-                        </button>
-                        <button class="btn btn-success" name="changeCart" type="submit"
-                                th:with="subtractId = ${item.key.getId() * (-1)}" th:value="${subtractId}">
-                            -
-                        </button>
-                    </form>
+                    <div class="fa-1x">
+                        <form action="/shoppingcart" method="post">
+                            <button class="btn btn-success" name="changeCart" type="submit"
+                                    th:value="${item.key.getId()}">
+                                <i class="fas fa-caret-square-up"></i>
+                            </button>
+                            <button class="btn btn-success" name="changeCart" type="submit"
+                                    th:with="subtractId = ${item.key.getId() * (-1)}" th:value="${subtractId}">
+                                <i class="fas fa-caret-square-down"></i>
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         </div>
