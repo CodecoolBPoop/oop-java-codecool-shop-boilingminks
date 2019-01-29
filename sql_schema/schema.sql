@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS
 product (id SERIAL PRIMARY KEY NOT NULL,
          name VARCHAR NOT NULL,
          description VARCHAR NOT NULL,
-         price int NOT NULL,
+         price float NOT NULL,
          currency VARCHAR NOT NULL,
          supplier_id int NOT NULL,
          category_id int NOT NULL,
