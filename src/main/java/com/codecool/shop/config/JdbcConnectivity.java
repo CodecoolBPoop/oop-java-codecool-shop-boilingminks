@@ -75,24 +75,5 @@ public class JdbcConnectivity {
         return resultList;
     }
 
-    public void loadSuppliers(SupplierDao supplierDataStore) {
-        String query = "TRUNCATE TABLE supplier CASCADE ;";
-        query += "INSERT INTO supplier (name, description) VALUES";
-        boolean notFirst = false;
-        for (Supplier sup : supplierDataStore.getAll()) {
-            if (notFirst) query += ",";
-            notFirst=true;
-            query += "(\'" + sup.getName() + "\',\'" + sup.getDescription() + "\')";
-        }
-        query += ";";
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-        ) {
-            statement.execute(query);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
 }
