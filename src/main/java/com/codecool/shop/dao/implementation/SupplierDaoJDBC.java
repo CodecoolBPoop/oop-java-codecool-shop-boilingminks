@@ -43,15 +43,15 @@ public class SupplierDaoJDBC implements SupplierDao {
     }
 
     public void loadAll(SupplierDao supplierDataStore) {
-        String query = "TRUNCATE TABLE supplier CASCADE ;";
-        query += "INSERT INTO supplier (name, description) VALUES";
+        StringBuilder query = new StringBuilder("TRUNCATE TABLE supplier CASCADE ;");
+        query.append("INSERT INTO supplier (name, description) VALUES");
         boolean notFirst = false;
         for (Supplier sup : supplierDataStore.getAll()) {
-            if (notFirst) query += ",";
+            if (notFirst) query.append(",");
             notFirst = true;
-            query += "(\'" + sup.getName() + "\',\'" + sup.getDescription() + "\')";
+            query.append("(\'").append(sup.getName()).append("\',\'").append(sup.getDescription()).append("\')");
         }
-        query += ";";
-        jdbcInstance.executeQuery(query);
+        query.append(";");
+        jdbcInstance.executeQuery(query.toString());
     }
 }
