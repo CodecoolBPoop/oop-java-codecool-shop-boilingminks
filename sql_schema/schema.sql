@@ -5,6 +5,7 @@ DROP TABLE supplier CASCADE ;
 DROP TABLE shopping_cart CASCADE ;
 DROP TABLE orders CASCADE ;
 
+
 CREATE TABLE IF NOT EXISTS
 users (id SERIAL PRIMARY KEY,
       first_name VARCHAR NOT NULL,
@@ -63,7 +64,9 @@ REFERENCES supplier(id);
 ALTER TABLE ONLY shopping_cart
 ADD CONSTRAINT fk_product_id
 FOREIGN KEY (product_id)
-REFERENCES product(id),
+REFERENCES product(id);
+
+ALTER TABLE ONLY shopping_cart
 ADD CONSTRAINT fk_order_id
 FOREIGN KEY (order_id)
 REFERENCES orders(id);
