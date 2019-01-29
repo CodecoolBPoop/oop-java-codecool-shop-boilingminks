@@ -5,6 +5,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.SupplierDaoJDBC;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
@@ -32,7 +33,7 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(libri);
         Supplier mondelez = new Supplier("Mondelez", "Confectionery");
         supplierDataStore.add(mondelez);
-        JdbcConnectivity.getInstance().loadSuppliers(supplierDataStore);
+        SupplierDaoJDBC.getInstance().loadAll(supplierDataStore);
 
         //setting up a new product category
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
