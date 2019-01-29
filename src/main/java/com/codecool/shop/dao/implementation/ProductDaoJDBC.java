@@ -11,7 +11,7 @@ import java.util.List;
 public class ProductDaoJDBC implements ProductDao {
     private static ProductDaoJDBC instance = null;
 
-    private JdbcConnectivity connection = JdbcConnectivity.getInstance();
+    private JdbcConnectivity JDBCInstance = JdbcConnectivity.getInstance();
 
     public static ProductDaoJDBC getInstance() {
         if (instance == null) {
@@ -22,7 +22,7 @@ public class ProductDaoJDBC implements ProductDao {
 
     @Override
     public void add(Product product) {
-        connection.executeQuery("INSERT INTO product (id, name, description, price, currency, supplier_id, category_id)" +
+        JDBCInstance.executeQuery("INSERT INTO product (id, name, description, price, currency, supplier_id, category_id)" +
                                 "VALUES ('" + product.getId() + "', '" + product.getName() + "', '" + product.getDescription() + "', '" + product.getDefaultPrice() + "', '" + product.getDefaultCurrency() + "', '" + product.getSupplier().getId() + "', '" + product.getProductCategory().getId() + "');");
     }
 
@@ -53,7 +53,7 @@ public class ProductDaoJDBC implements ProductDao {
 
     public void clear(){
         String query = "TRUNCATE TABLE product CASCADE ;";
-        connection.executeQuery(query);
+        JDBCInstance.executeQuery(query);
     }
 
     public void addAll(ProductDao productDao){

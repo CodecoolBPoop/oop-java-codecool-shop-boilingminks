@@ -3,10 +3,7 @@ package com.codecool.shop.config;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoJDBC;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -37,12 +34,17 @@ public class Initializer implements ServletContextListener {
         JdbcConnectivity.getInstance().loadSuppliers(supplierDataStore);
 
         //setting up a new product category
+        ProductCategoryDaoJDBC productCategoryDaoJDBC = ProductCategoryDaoJDBC.getInstance();
+        productCategoryDaoJDBC.clear();
+
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         ProductCategory book = new ProductCategory("Book", "Paper", "Papermade information handling device. Pretty oldschool.");
         ProductCategory snack = new ProductCategory("Snack", "Food", "Stuff the developer needs to stay alive.");
         productCategoryDataStore.add(tablet);
         productCategoryDataStore.add(book);
         productCategoryDataStore.add(snack);
+
+        productCategoryDaoJDBC.addAll(productCategoryDataStore);
 
         //setting up products and printing it
 
