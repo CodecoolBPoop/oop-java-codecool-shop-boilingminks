@@ -35,7 +35,7 @@ public class JdbcConnectivity {
                 DB_PASSWORD);
     }
 
-    private void executeQuery(String query) {
+    public void executeQuery(String query) {
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
         ) {
