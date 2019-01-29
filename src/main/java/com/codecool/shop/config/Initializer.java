@@ -44,19 +44,19 @@ public class Initializer implements ServletContextListener {
         productCategoryDataStore.add(snack);
 
         //setting up products and printing it
-        productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
-        productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
-        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
-        productDataStore.add(new Product("A Thousand Splendid Suns", 12, "USD", "A Thousand Splendid Suns is a breathtaking story set against the volatile events of Afghanistan's last thirty years—from the Soviet invasion to the reign of the Taliban to post-Taliban rebuilding—that puts the violence, fear, hope, and faith of this country in intimate, human terms.", book, libri));
-        productDataStore.add(new Product("American Gods", 13, "USD", "Scary, gripping and deeply unsettling, American Gods takes a long, hard look into the soul of America.", book, libri));
-        productDataStore.add(new Product("Little Fires Everywhere", 14, "USD", "Little Fires Everywhere explores the weight of long-held secrets and the ferocious pull of motherhood-and the danger of believing that planning and following the rules can avert disaster, or heartbreak.", book, libri));
-        productDataStore.add(new Product("Cadbury", 3, "USD", "Cadbury Dairy Milk will launch new mint and peanut butter-flavoured Oreo bars this month, in a bid to recruit young adults to the tablets category.", snack, mondelez));
-        productDataStore.add(new Product("Peanut Puffs", 2, "USD", "LOW Fat, LOW Sugar, HIGH Protein, HIGH Fiber - Made with all natural ingredients", snack, mondelez));
-        productDataStore.add(new Product("Snickers Mini Cubes", 4, "USD", "Yumm yumm!!", snack, mondelez));
+        productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon, "product_1.jpg"));
+        productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo, "product_2.jpg"));
+        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon, "product_3.jpg"));
+        productDataStore.add(new Product("A Thousand Splendid Suns", 12, "USD", "A Thousand Splendid Suns is a breathtaking story set against the volatile events of Afghanistan's last thirty years—from the Soviet invasion to the reign of the Taliban to post-Taliban rebuilding—that puts the violence, fear, hope, and faith of this country in intimate, human terms.", book, libri, "product_4.jpg"));
+        productDataStore.add(new Product("American Gods", 13, "USD", "Scary, gripping and deeply unsettling, American Gods takes a long, hard look into the soul of America.", book, libri, "product_5.jpg"));
+        productDataStore.add(new Product("Little Fires Everywhere", 14, "USD", "Little Fires Everywhere explores the weight of long-held secrets and the ferocious pull of motherhood-and the danger of believing that planning and following the rules can avert disaster, or heartbreak.", book, libri, "product_6.jpg"));
+        productDataStore.add(new Product("Cadbury", 3, "USD", "Cadbury Dairy Milk will launch new mint and peanut butter-flavoured Oreo bars this month, in a bid to recruit young adults to the tablets category.", snack, mondelez, "product_7.jpg"));
+        productDataStore.add(new Product("Peanut Puffs", 2, "USD", "LOW Fat, LOW Sugar, HIGH Protein, HIGH Fiber - Made with all natural ingredients", snack, mondelez, "product_8.jpg"));
+        productDataStore.add(new Product("Snickers Mini Cubes", 4, "USD", "Yumm yumm!!", snack, mondelez, "product_9.jpg"));
         productDataStore.add(new Product("8.5 Ultra LCD Writing Tablet Pen Writing Drawing Memo Message Boogie Board YT", 7, "USD", "Mild color, no harm to your eyes, no radiation." +
                 "Pressure sensitive, easy to use and play." +
                 "Clear screen with just one button." +
                 "Ultra thin and lightweight design, convenient to carry." +
-                "Suitable for writing and drawing, home message, etc.", tablet, mondelez));
+                "Suitable for writing and drawing, home message, etc.", tablet, mondelez, "product_10.jpg"));
     }
 }
