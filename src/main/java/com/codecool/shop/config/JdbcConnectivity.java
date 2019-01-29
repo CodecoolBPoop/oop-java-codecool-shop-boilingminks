@@ -1,5 +1,8 @@
 package com.codecool.shop.config;
 
+import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.model.Supplier;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,9 +10,9 @@ import java.util.List;
 
 public class JdbcConnectivity {
 
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/todolist";
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "postgres";
+    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
+    private static final String DB_USER = "zsombor";
+    private static final String DB_PASSWORD = System.getenv("PW");
 
     private static JdbcConnectivity SINGLE_INSTANCE = null;
 
@@ -70,5 +73,26 @@ public class JdbcConnectivity {
         }
 
         return resultList;
+    }
+
+    public void loadSuppliers(SupplierDao supplierDataStore) {
+        String query = "TRUNCATE TABLE supplier CASCADE ;";
+        query += "INSERT INTO supplier (name, description) VALUES";
+        boolean notFirst = false;
+        for (Supplier sup : supplierDataStore.getAll()) {
+            if (notFirst) query += ",";
+            notFirst=true;
+            query += "(\'" + sup.getName() + "\',\'" + sup.getDescription() + "\')";
+        }
+        query += ";";
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+        ) {
+            statement.execute(query);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
