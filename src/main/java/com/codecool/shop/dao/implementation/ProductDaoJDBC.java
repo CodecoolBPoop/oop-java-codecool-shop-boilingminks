@@ -9,13 +9,21 @@ import com.codecool.shop.model.Supplier;
 import java.util.List;
 
 public class ProductDaoJDBC implements ProductDao {
+    private static ProductDaoJDBC instance = null;
 
     private JdbcConnectivity connection = JdbcConnectivity.getInstance();
 
+    public static ProductDaoJDBC getInstance() {
+        if (instance == null) {
+            instance = new ProductDaoJDBC();
+        }
+        return instance;
+    }
+
     @Override
     public void add(Product product) {
-//        connection.executeQuery("INSERT INTO product (id, name, description, price, currency, supplier_id, category_id, image_name)" +
-//                                "VALUES ('" + product.getId() + "', '" + product.getName() + "', '" + product.getDescription() + "', '" + product.getPrice() + "', '" + product.getDefaultCurrency() + "', '" + product.getSupplier().getId() + "', '" + product.getProductCategory().getId() + "', '" + product.getImageid() + "');");
+        connection.executeQuery("INSERT INTO product (id, name, description, price, currency, supplier_id, category_id)" +
+                                "VALUES ('" + product.getId() + "', '" + product.getName() + "', '" + product.getDescription() + "', '" + product.getDefaultPrice() + "', '" + product.getDefaultCurrency() + "', '" + product.getSupplier().getId() + "', '" + product.getProductCategory().getId() + "');");
     }
 
     @Override
@@ -41,5 +49,17 @@ public class ProductDaoJDBC implements ProductDao {
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
         return null;
+    }
+
+    public void clear(){
+        String query = "TRUNCATE TABLE product CASCADE ;";
+        connection.executeQuery(query);
+    }
+
+    public void addAll(ProductDao productDao){
+
+        for (Product product:productDao.getAll()) {
+            this.add(product);
+        }
     }
 }
