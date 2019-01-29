@@ -22,8 +22,8 @@ public class ProductDaoJDBC implements ProductDao {
 
     @Override
     public void add(Product product) {
-        JDBCInstance.executeQuery("INSERT INTO product (id, name, description, price, currency, supplier_id, category_id)" +
-                                "VALUES ('" + product.getId() + "', '" + product.getName() + "', '" + product.getDescription() + "', '" + product.getDefaultPrice() + "', '" + product.getDefaultCurrency() + "', '" + product.getSupplier().getId() + "', '" + product.getProductCategory().getId() + "');");
+        JDBCInstance.executeQuery("INSERT INTO product (id, name, description, price, currency, supplier_id, category_id, image_name)" +
+                                "VALUES ('" + product.getId() + "', '" + product.getName() + "', '" + product.getDescription() + "', '" + product.getDefaultPrice() + "', '" + product.getDefaultCurrency() + "', '" + product.getSupplier().getId() + "', '" + product.getProductCategory().getId() + "', '" + product.getImageName() + "');");
     }
 
     @Override

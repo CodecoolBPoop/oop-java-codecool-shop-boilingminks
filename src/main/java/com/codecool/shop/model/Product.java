@@ -16,6 +16,7 @@ public class Product extends BaseModel {
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
+        this.imageName = imageName;
     }
 
     public float getDefaultPrice() {
@@ -75,5 +76,9 @@ public class Product extends BaseModel {
                 this.defaultCurrency.toString(),
                 this.productCategory.getName(),
                 this.supplier.getName());
+    }
+
+    public String getImageName() {
+        return imageName;
     }
 }
