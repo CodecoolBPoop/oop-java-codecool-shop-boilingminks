@@ -4,14 +4,11 @@ import com.codecool.shop.config.JdbcConnectivity;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 public class SupplierDaoJDBC implements SupplierDao {
 
-    JdbcConnectivity jdbcInstance = JdbcConnectivity.getInstance();
+    private JdbcConnectivity jdbcInstance = JdbcConnectivity.getInstance();
 
     private static SupplierDaoJDBC instance = null;
 
