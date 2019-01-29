@@ -27,7 +27,7 @@ product (id SERIAL PRIMARY KEY NOT NULL,
          currency VARCHAR NOT NULL,
          supplier_id int NOT NULL,
          category_id int NOT NULL,
-         image_name VARCHAR NOT NULL);
+         image_name VARCHAR);
 
 CREATE TABLE IF NOT EXISTS
 product_category (id SERIAL PRIMARY KEY NOT NULL,
