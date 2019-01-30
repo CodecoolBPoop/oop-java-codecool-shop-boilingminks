@@ -35,7 +35,12 @@ public class ProductDaoMem implements ProductDao {
 
     @Override
     public Product find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        if (id <= 0){
+            throw new IllegalArgumentException("Integer must be more than 0!");
+        }
+        else {
+            return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        }
     }
 
     @Override
