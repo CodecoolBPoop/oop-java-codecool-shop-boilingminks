@@ -49,9 +49,9 @@ public class JdbcConnectivity {
         }
     }
 
-    public List<HashMap<String, String>> executeQuerySelect(String query) {
-
-        List<HashMap<String, String>> resultList = new ArrayList<>();
+    public ArrayList<HashMap<String, String>> queryAllFromTable(String tablename) {
+        String query = "SELECT * FROM " + tablename + ";";
+        ArrayList<HashMap<String, String>> resultList = new ArrayList<>();
 
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
@@ -60,7 +60,7 @@ public class JdbcConnectivity {
             ResultSetMetaData metaData = resultSet.getMetaData();
             while (resultSet.next()) {
                 HashMap<String, String> row = new HashMap<>();
-                for (int i = 0; i < metaData.getColumnCount(); i++) {
+                for (int i = 1; i <= metaData.getColumnCount(); i++) {
                     String columnName = metaData.getColumnName(i);
                     row.put(columnName, resultSet.getString(columnName));
                 }
