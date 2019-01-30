@@ -40,7 +40,7 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
     }
 
     public void clear(){
-        String query = "TRUNCATE TABLE product CASCADE;";
+        String query = "TRUNCATE TABLE product_category CASCADE;";
         JDBCInstance.executeQuery(query);
     }
 
