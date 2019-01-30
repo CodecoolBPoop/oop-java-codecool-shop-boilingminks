@@ -21,7 +21,7 @@ public class Initializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
 
-//        BuildUpDataBase.buildUpDB();
+        BuildUpDataBase.buildUpDB();
 
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
