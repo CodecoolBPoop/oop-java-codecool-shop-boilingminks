@@ -6,7 +6,7 @@
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>BoilingMinks Shop</title>
+    <title>BoilingMinks Shop - ADMIN</title>
 
     <!-- Font Awsome call -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
@@ -41,58 +41,42 @@
 <body>
 
 <div th:replace="header.html :: copy"></div>
+
 <div th:if="${userID==1}">
-    <form action="/admin" method="get">
-    <button type="submit" class="fa-2x">
-        <i class="fas fa-toolbox"></i>
-    </button>
-    </form>
-</div>
-<div class="container">
-    <div class="row">
-        <div th:each="supp, iterStat : ${suppliers}" th:value="${supp.id}" class="col-sm-3">
-            <div class="card text-center">
-                <a th:href="@{/prod-by-supp(id=${supp.id})}"><strong th:text="${supp.name}">Supplier Name</strong></a>
-            </div>
-        </div>
-    </div>
-    <p></p>
-    <div class="row">
-        <div th:each="category: ${categories}" class="col-sm-3">
-            <div class="card text-center">
-                <a th:href="@{/filter(cat=${category.name})}"><strong th:text="${category.name}">Category Title</strong></a>
-            </div>
-        </div>
-    </div>
-    <div id="products" class="row mt-4">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" height="250"
-                     th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
+    <div class="container">
+        <h1>Admin page</h1>
+        <div class="container">
+            <form action="/admin" method="post">
+                <div class="form-group">
+                    <p>Product name:</p>
+                    <input required type="text" class="form-control" name="productName" placeholder="Product name">
                 </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                        <form method="post" action="/">
-                            <button class="btn btn-success" name="changeCart" type="submit" th:value="${prod.getId()}">
-                                <div class="fa-2x">
-                                    <i class="fas fa-cart-plus"></i>
-                                </div>
-                            </button>
-                        </form>
-                    </div>
+                <div class="form-group">
+                    <p>Description:</p>
+                    <input required type="text" class="form-control" name="description" placeholder="Description">
                 </div>
-            </div>
-            <p></p>
-            <p></p>
+                <div class="form-group">
+                    <p>Price:</p>
+                    <input required type="number" step="0.01" class="form-control" name="price" placeholder="Price">
+                </div>
+                <div class="form-group">
+                    <p>Supplier:</p>
+                    <select name="supplier">
+                        <option th:each="supp : ${suppliers}" th:text="${supp.getName()}" th:value="${supp.getName()}">SUPPLIER</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <p>Category:</p>
+                    <select name="productCategory">
+                        <option th:each="cat : ${categories}" th:text="${cat.getName()}" th:value="${cat.getName()}">Category</option>
+                    </select>
+                </div>
+                <input required type="file" name="picture" accept="image/*">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </div>
+
 </div>
-<div th:replace="footer.html :: copy"></div>
 </body>
 </html>
