@@ -26,8 +26,8 @@ public class ProductDaoJDBC implements ProductDao {
 
     @Override
     public void add(Product product) {
-        JDBCInstance.executeQuery("INSERT INTO product (id, name, description, price, currency, supplier_id, category_id, image_name)" +
-                                "VALUES ('" + product.getId() + "', '" + product.getName() + "', '" + product.getDescription() + "', '" + product.getDefaultPrice() + "', '" + product.getDefaultCurrency() + "', '" + product.getSupplier().getId() + "', '" + product.getProductCategory().getId() + "', '" + product.getImageName() + "');");
+        JDBCInstance.executeQuery("INSERT INTO product (name, description, price, currency, supplier_id, category_id, image_name)" +
+                                "VALUES ('" + product.getName() + "', '" + product.getDescription() + "', '" + product.getDefaultPrice() + "', '" + product.getDefaultCurrency() + "', '" + product.getSupplier().getId() + "', '" + product.getProductCategory().getId() + "', '" + product.getImageName() + "');");
     }
 
     @Override
@@ -80,8 +80,8 @@ public class ProductDaoJDBC implements ProductDao {
             Product tempProduct = new Product(product.get("productName"),
                     Float.parseFloat(product.get("price")), "USD",
                     product.get("description"),
-                    ProductCategoryDaoMem.getInstance().find(Integer.parseInt(product.get("productCategory"))),
-                    SupplierDaoMem.getInstance().find(Integer.parseInt(product.get("supplier"))),
+                    ProductCategoryDaoMem.getInstance().find(Integer.parseInt(product.get("category_id"))),
+                    SupplierDaoMem.getInstance().find(Integer.parseInt(product.get("supplier_id"))),
                     product.get("image_name"));
             resultList.add(tempProduct);
         }

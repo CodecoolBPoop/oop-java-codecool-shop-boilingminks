@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 
 @WebServlet(urlPatterns = {"/admin"})
 public class Admin extends HttpServlet {
@@ -51,7 +50,7 @@ public class Admin extends HttpServlet {
                 request.getParameter("picture"));
 
         ProductDaoJDBC.getInstance().add(newProduct);
-//        ProductDaoMem.getInstance().add(newProduct);
+
 
         context.setVariable("userID", userId);
         response.sendRedirect("/admin");

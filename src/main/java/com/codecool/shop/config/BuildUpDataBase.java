@@ -57,11 +57,6 @@ public class BuildUpDataBase {
                 "Suitable for writing and drawing, home message, etc.", tablet, mondelez, "product_10.jpg"));
 
 
-        for (Product p : tempProductDS) {
-            System.out.println(p.toString());
-        }
-
-
         SupplierDaoJDBC.getInstance().loadAll(tempSupplierDS);
 
         ProductCategoryDaoJDBC productCategoryDaoJDBC = ProductCategoryDaoJDBC.getInstance();
