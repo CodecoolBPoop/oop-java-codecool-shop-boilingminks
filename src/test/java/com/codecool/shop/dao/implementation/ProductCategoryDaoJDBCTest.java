@@ -38,8 +38,10 @@ class ProductCategoryDaoJDBCTest {
 
     @Test
     void testIsCanClearTable() {
-        ProductCategory duckFood = new ProductCategory(1, "Duck Food", "Animal Food", "the most nutritious duck food on the market");
-        ProductCategory catFood = new ProductCategory(2, "Cat Food", "Animal Food", "the most nutritious cat food on the market");
+        ArrayList<ProductCategory> productCategories = new ArrayList<>();
+        productCategories.add(new ProductCategory(1, "Duck Food", "Animal Food", "the most nutritious duck food on the market"));
+        productCategories.add(new ProductCategory(2, "Cat Food", "Animal Food", "the most nutritious cat food on the market"));
+        testInstance.addAll(productCategories);
         testInstance.clear();
         ArrayList<HashMap<String, String>> dbData = connInst.queryAllFromTable("product_category");
         assertEquals(0, dbData.size());
@@ -50,18 +52,16 @@ class ProductCategoryDaoJDBCTest {
         ArrayList<ProductCategory> productCategories = new ArrayList<>();
         productCategories.add(new ProductCategory(1, "Duck Food", "Animal Food", "the most nutritious duck food on the market"));
         productCategories.add(new ProductCategory(2, "Cat Food", "Animal Food", "the most nutritious cat food on the market"));
-        productCategories.add(new ProductCategory(2, "Horse Food", "Animal Food", "the most nutritious horse food on the market"));
-        productCategories.add(new ProductCategory(2, "Kangaroo Food", "Animal Food", "the most nutritious kangaroo food on the market"));
+        productCategories.add(new ProductCategory(3, "Horse Food", "Animal Food", "the most nutritious horse food on the market"));
+        productCategories.add(new ProductCategory(4, "Kangaroo Food", "Animal Food", "the most nutritious kangaroo food on the market"));
         testInstance.addAll(productCategories);
         ArrayList<HashMap<String, String>> dbData = connInst.queryAllFromTable("product_category");
         assertEquals(4, dbData.size());
+        final int[] definedProductCounter = {0};
         dbData.forEach((dbProductCat) -> {
-            productCategories.forEach((definedProductCat) -> {
-                assertEquals(dbProductCat.get("name"), definedProductCat.getName());
-                assertEquals(dbData.get(0).get("department"), new ProductCategory(1, "Duck Food", "Animal Food", "the most nutritious duck food on the market").getDepartment());
-                assertEquals(dbData.get(0).get("description"), new ProductCategory(1, "Duck Food", "Animal Food", "the most nutritious duck food on the market").getDescription());
-            });
+            assertEquals(dbProductCat.get("name"), productCategories.get(definedProductCounter[0]).getName());
+            assertEquals(dbProductCat.get("department"), productCategories.get(definedProductCounter[0]).getDepartment());
+            assertEquals(dbProductCat.get("description"), productCategories.get(definedProductCounter[0]++).getDescription());
         });
-
     }
 }
