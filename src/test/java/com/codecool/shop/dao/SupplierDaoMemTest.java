@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SupplierDaoMemTest {
 
-    private SupplierDao supplierDao = SupplierDaoMem.getInstance();
+    private SupplierDao supplierDao = SupplierDaoMem.getTestInstance();
 
     @BeforeEach
-    void setup(){
+    void setup() {
         for (int i = 1; i < 20; i++) {
             supplierDao.remove(i);
         }
@@ -36,15 +36,13 @@ class SupplierDaoMemTest {
     @Test
     void testFind() {
         for (int i = 0; i < 20; i++) {
-            if (i == 0){
+            if (i == 0) {
                 assertThrows(IllegalArgumentException.class, () -> {
                     supplierDao.find(0);
                 });
-            }
-            else if (i <= 10){
+            } else if (i <= 10) {
                 assertNotNull(supplierDao.find(i));
-            }
-            else {
+            } else {
                 assertNull(supplierDao.find(i));
             }
         }
@@ -65,7 +63,7 @@ class SupplierDaoMemTest {
         for (int i = 0; i < 10; i++) {
             Supplier actual = actuals.get(i);
 
-            Supplier expected = supplierDao.find(i+1);
+            Supplier expected = supplierDao.find(i + 1);
             assertEquals(expected, actual);
         }
     }
