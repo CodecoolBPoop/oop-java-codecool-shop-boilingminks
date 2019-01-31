@@ -14,6 +14,7 @@ public class ProductDaoMem implements ProductDao {
 
     private List<Product> data = new ArrayList<>();
     private static ProductDaoMem instance = null;
+    private static ProductDaoMem testInstance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
@@ -25,6 +26,13 @@ public class ProductDaoMem implements ProductDao {
             instance = new ProductDaoMem();
         }
         return instance;
+    }
+
+    public static ProductDaoMem getTestInstance() {
+        if (testInstance == null) {
+            testInstance = new ProductDaoMem();
+        }
+        return testInstance;
     }
 
     @Override
