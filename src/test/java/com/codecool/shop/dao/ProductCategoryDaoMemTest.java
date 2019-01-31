@@ -5,6 +5,8 @@ import com.codecool.shop.model.ProductCategory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductCategoryDaoMemTest{
@@ -24,7 +26,7 @@ class ProductCategoryDaoMemTest{
     }
 
     @Test
-    void add() {
+    void testAdd() {
         for (int i = 0; i < 10; i++) {
             ProductCategory category = productCategoryDao.getAll().get(i);
             assertEquals(category.getName(), "test" + i);
@@ -32,7 +34,7 @@ class ProductCategoryDaoMemTest{
     }
 
     @Test
-    void find() {
+    void testFind() {
         for (int i = 0; i < 20; i++) {
             if (i == 0){
                 assertThrows(IllegalArgumentException.class, () -> {
@@ -49,7 +51,7 @@ class ProductCategoryDaoMemTest{
     }
 
     @Test
-    void remove() {
+    void testRemove() {
         for (int i = 1; i <= 10; i++) {
             productCategoryDao.remove(i);
             assertNull(productCategoryDao.find(i));
@@ -57,7 +59,13 @@ class ProductCategoryDaoMemTest{
     }
 
     @Test
-    void getAll() {
+    void testGetAll() {
+        List<ProductCategory> actuals = productCategoryDao.getAll();
+        for (int i = 0; i < 10; i++) {
+            ProductCategory actual = actuals.get(i);
 
+            ProductCategory expected = productCategoryDao.find(i+1);
+            assertEquals(expected, actual);
+        }
     }
 }
