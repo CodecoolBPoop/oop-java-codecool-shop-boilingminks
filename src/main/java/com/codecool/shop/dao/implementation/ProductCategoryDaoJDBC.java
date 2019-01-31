@@ -4,6 +4,7 @@ import com.codecool.shop.config.JdbcConnectivity;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCategoryDaoJDBC implements ProductCategoryDao {
@@ -40,13 +41,13 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
     }
 
     public void clear(){
-        String query = "TRUNCATE TABLE product CASCADE;";
+        String query = "TRUNCATE TABLE product_category CASCADE;";
         JDBCInstance.executeQuery(query);
     }
 
-    public void addAll(ProductCategoryDao categoryDao){
+    public void addAll(ArrayList<ProductCategory> categoryDao){
 
-        for (ProductCategory category:categoryDao.getAll()) {
+        for (ProductCategory category:categoryDao) {
             this.add(category);
         }
     }
