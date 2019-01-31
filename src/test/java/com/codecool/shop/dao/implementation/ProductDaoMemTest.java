@@ -1,6 +1,6 @@
-package com.codecool.shop.dao;
+package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.dao.implementation.ProductDaoJDBC;
+import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductDaoMemTest {
 
-    private ProductDaoJDBC productDao = ProductDaoJDBC.getInstance();
+    private ProductDao productDao = ProductDaoMem.getTestInstance();
     private Supplier testSupplier;
     private ProductCategory testCategory;
 

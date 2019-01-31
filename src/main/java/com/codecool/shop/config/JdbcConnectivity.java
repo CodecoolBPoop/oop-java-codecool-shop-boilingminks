@@ -13,7 +13,7 @@ import java.util.List;
 
 public class JdbcConnectivity {
 
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
+    private static final String DATABASE = System.getenv("url");
     private static final String DB_USER = System.getenv("username");
     private static final String DB_PASSWORD = System.getenv("PW");
 
