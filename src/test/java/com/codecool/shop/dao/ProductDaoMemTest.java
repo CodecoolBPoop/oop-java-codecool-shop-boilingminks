@@ -63,7 +63,7 @@ class ProductDaoMemTest {
     }
 
     @Test
-    void remove() {
+    void testRemove() {
 
         for (int i = 1; i <= 10; i++) {
             productDao.remove(i);
@@ -72,9 +72,13 @@ class ProductDaoMemTest {
     }
 
     @Test
-    void getAll() {
-        for (Product product : productDao.getAll()) {
-            assertNotNull(product);
+    void testGetAll() {
+        List<Product> actuals = productDao.getAll();
+        for (int i = 0; i < 10; i++) {
+            Product actual = actuals.get(i);
+
+            Product expected = productDao.find(i+1);
+            assertEquals(expected, actual);
         }
     }
 
