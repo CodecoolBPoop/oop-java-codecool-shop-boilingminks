@@ -35,4 +35,10 @@ class ProductCategoryDaoJDBCTest {
         assertEquals(dbData.get(0).get("department"), duckFood.getDepartment());
         assertEquals(dbData.get(0).get("description"), duckFood.getDescription());
     }
+
+    @Test
+    void testIsCanClearTable() {
+        ProductCategory duckFood = new ProductCategory(1, "Duck Food", "Animal Food", "the most nutritious duck food on the market");
+        ProductCategory catFood = new ProductCategory(2, "Cat Food", "Animal Food", "the most nutritious cat food on the market");
+    }
 }
