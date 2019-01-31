@@ -5,7 +5,7 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoJDBC;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -22,7 +22,7 @@ public class ProductFilter extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao products = ProductDaoMem.getInstance();
+        ProductDao products = ProductDaoJDBC.getInstance();
         ProductCategoryDao productCategories = ProductCategoryDaoMem.getInstance();
         ShoppingCartDao shoppingCarts = ShoppingCartDaoMem.getInstance();
 

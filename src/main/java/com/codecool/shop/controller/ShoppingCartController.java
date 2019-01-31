@@ -5,6 +5,7 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoJDBC;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
@@ -28,7 +29,7 @@ public class ShoppingCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
         ShoppingCartDao shoppingCarts = ShoppingCartDaoMem.getInstance();
-        ProductDao productDao = ProductDaoMem.getInstance();
+        ProductDao productDao = ProductDaoJDBC.getInstance();
 
         Map<Product, Integer> cartData = new HashMap<>();
 
@@ -37,12 +38,11 @@ public class ShoppingCartController extends HttpServlet {
         int userId = 1; // TODO: USER SYSTEM
         float sumOfPrices = 0;
         Map<Integer, Integer> userCart = shoppingCarts.getAll().get(userId);
-
+        System.out.println(userCart);
         if (stringItemId != null) {
 
             updateCart(shoppingCarts, stringItemId, userCart);
         }
-
         if (userCart != null) {
 
             for (Integer key : userCart.keySet()) {

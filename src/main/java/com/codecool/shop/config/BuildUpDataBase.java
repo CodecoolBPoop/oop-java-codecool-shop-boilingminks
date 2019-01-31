@@ -43,7 +43,7 @@ public class BuildUpDataBase {
 
 
         tempProductDS.add(new Product(1,"Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon, "product_1.jpg"));
-        tempProductDS.add(new Product(2,"Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo, "product_2.jpg"));
+        tempProductDS.add(new Product(2,"Lenovo IdeaPad Mix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo, "product_2.jpg"));
         tempProductDS.add(new Product(3,"Amazon Fire HD 8", 89, "USD", "Amazon''s latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon, "product_3.jpg"));
         tempProductDS.add(new Product(4,"A Thousand Splendid Suns", 12, "USD", "A Thousand Splendid Suns is a breathtaking story set against the volatile events of Afghanistan''s last thirty years—from the Soviet invasion to the reign of the Taliban to post-Taliban rebuilding—that puts the violence, fear, hope, and faith of this country in intimate, human terms.", book, libri, "product_4.jpg"));
         tempProductDS.add(new Product(5,"American Gods", 13, "USD", "Scary, gripping and deeply unsettling, American Gods takes a long, hard look into the soul of America.", book, libri, "product_5.jpg"));
@@ -56,8 +56,6 @@ public class BuildUpDataBase {
                 "Clear screen with just one button." +
                 "Ultra thin and lightweight design, convenient to carry." +
                 "Suitable for writing and drawing, home message, etc.", tablet, mondelez, "product_10.jpg"));
-
-
 
         SupplierDaoJDBC.getInstance().loadAll(tempSupplierDS);
 

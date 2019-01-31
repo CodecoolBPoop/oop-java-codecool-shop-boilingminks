@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductDaoMemTest {
 
-    private ProductDao productDao = ProductDaoMem.getInstance();
+    private ProductDao productDao = ProductDaoMem.getTestInstance();
     private Supplier testSupplier;
     private ProductCategory testCategory;
 

@@ -5,10 +5,7 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.*;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -29,7 +26,7 @@ public class ProductBySupplierController extends HttpServlet {
 
 
         ShoppingCartDao shoppingCarts = ShoppingCartDaoMem.getInstance();
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductDao productDataStoreJDBC = ProductDaoJDBC.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 
@@ -39,7 +36,7 @@ public class ProductBySupplierController extends HttpServlet {
         context.setVariable("sum_of_items", shoppingCarts.getSumOfItems().get(userId));
         context.setVariable("recipient", "World");
         context.setVariable("category", productCategoryDataStore.find(1));
-        context.setVariable("products", productDataStore.getBy(supplierDataStore.find(supplierId)));
+        context.setVariable("products", productDataStoreJDBC.getBy(supplierDataStore.find(supplierId)));
         context.setVariable("suppliers", supplierDataStore.getAll());
         engine.process("product/index.html", context, resp.getWriter());
     }

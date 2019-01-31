@@ -26,9 +26,9 @@ public class Initializer implements ServletContextListener {
 
 
         //Download the data from DB and put it to each data stores
-        ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+
 
         ArrayList<HashMap<String, String>> suppliers = JdbcConnectivity.getInstance().queryAllFromTable("supplier");
         for (HashMap<String, String> entry : suppliers) {
@@ -42,10 +42,5 @@ public class Initializer implements ServletContextListener {
             productCategoryDataStore.add(temp);
         }
 
-        ArrayList<HashMap<String, String>> products = JdbcConnectivity.getInstance().queryAllFromTable("product");
-        for (HashMap<String, String> entry : products) {
-            Product temp = new Product(entry.get("name"), Float.parseFloat(entry.get("price")), entry.get("currency"), entry.get("description"), productCategoryDataStore.find(Integer.parseInt(entry.get("category_id"))), supplierDataStore.find(Integer.parseInt(entry.get("supplier_id"))), entry.get("image_name"));
-            productDataStore.add(temp);
-        }
     }
 }

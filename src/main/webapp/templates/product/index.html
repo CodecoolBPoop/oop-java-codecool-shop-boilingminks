@@ -41,7 +41,13 @@
 <body>
 
 <div th:replace="header.html :: copy"></div>
-
+<div th:if="${userID==1}">
+    <form action="/admin" method="get">
+    <button type="submit" class="fa-2x">
+        <i class="fas fa-toolbox"></i>
+    </button>
+    </form>
+</div>
 <div class="container">
     <div class="row">
         <div th:each="supp, iterStat : ${suppliers}" th:value="${supp.id}" class="col-sm-3">
@@ -62,7 +68,7 @@
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">
                 <img class="" src="http://placehold.it/400x250/000/fff" height="250"
-                     th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
+                     th:attr="src='/static/img/' + ${prod.getImageName()}" alt=""/>
                 <div class="card-header">
                     <h4 class="card-title" th:text="${prod.name}">Product name</h4>
                     <p class="card-text" th:text="${prod.description}">Product description... </p>
