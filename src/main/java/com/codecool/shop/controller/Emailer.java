@@ -3,6 +3,7 @@ import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.OrderDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoJDBC;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
@@ -21,7 +22,7 @@ public class Emailer {
         // DATA
         int userId = 1; // TODO: USER SYSTEM!
         Map<Integer, Integer>  userCart = ShoppingCartDaoMem.getInstance().getAll().get(userId);
-        ProductDao productDaoMem = ProductDaoMem.getInstance();
+        ProductDao productDaoMem = ProductDaoJDBC.getInstance();
 
         String from = USER_NAME;
         String pass = PASSWORD;

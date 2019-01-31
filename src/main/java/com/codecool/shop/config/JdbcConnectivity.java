@@ -103,5 +103,30 @@ public class JdbcConnectivity {
             e.printStackTrace();
         }
     }
+    public List<HashMap<String, String>> executeQuerySelect(String query) {
+
+        List<HashMap<String, String>> resultList = new ArrayList<>();
+
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ) {
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            while (resultSet.next()) {
+                HashMap<String, String> row = new HashMap<>();
+                for (int i = 0; i < metaData.getColumnCount(); i++) {
+                    String columnName = metaData.getColumnName(i);
+                    row.put(columnName, resultSet.getString(columnName));
+                }
+                resultList.add(row);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultList;
+    }
 
 }

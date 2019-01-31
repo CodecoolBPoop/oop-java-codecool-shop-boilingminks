@@ -50,8 +50,8 @@ public class Admin extends HttpServlet {
                 suppliers.find(Integer.parseInt(request.getParameter("supplier"))),
                 request.getParameter("picture"));
 
-//        ProductDaoJDBC.getInstance().add(newProduct);
-        ProductDaoMem.getInstance().add(newProduct);
+        ProductDaoJDBC.getInstance().add(newProduct);
+//        ProductDaoMem.getInstance().add(newProduct);
 
         context.setVariable("userID", userId);
         response.sendRedirect("/admin");

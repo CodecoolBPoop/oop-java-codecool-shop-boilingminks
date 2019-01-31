@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.config.JdbcConnectivity;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -31,29 +32,59 @@ public class ProductDaoJDBC implements ProductDao {
 
     @Override
     public Product find(int id) {
-        return null;
+        Product product;
+        List<HashMap<String, String>> allProducts = JDBCInstance.executeQuerySelect("SELECT * FROM product WHERE id= '"+ Integer.toString(id) +"' ;");
+        return product;
     }
 
     @Override
     public void remove(int id) {
-
+        JDBCInstance.executeQuery("REMOVE * FROM product WHERE id='"+ Integer.toString(id) +"' ;");
     }
 
     @Override
     public List<Product> getAll() {
-        return null;
+        List<Product> products = new ArrayList<>();
+        ArrayList<HashMap<String, String>> allProducts = JDBCInstance.queryAllFromTable("product");
+        productListFromHasMap(products, allProducts);
+        return products;
     }
 
     @Override
     public List<Product> getBy(Supplier supplier) {
-        return null;
+        int suplierId = supplier.getId();
+        List<Product> resultList = new ArrayList<>();
+        List<HashMap<String, String>> filteredProducts;
+        filteredProducts = JDBCInstance.executeQuerySelect(
+                " SELECT * FROM product WHERE supplier_id ='" +  Integer.toString(suplierId) +"';"
+        );
+        productListFromHasMap(resultList, filteredProducts);
+        return resultList;
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
-        return null;
+        int categoryId = productCategory.getId();
+        List<Product> resultList = new ArrayList<>();
+        List<HashMap<String, String>> filteredProducts;
+        filteredProducts = JDBCInstance.executeQuerySelect(
+                " SELECT * FROM product WHERE category_id ='" + Integer.toString(categoryId) + "';"
+        );
+        productListFromHasMap(resultList, filteredProducts);
+        return resultList;
     }
 
+    private void productListFromHasMap(List<Product> resultList, List<HashMap<String, String>> filteredProducts) {
+        for (HashMap<String, String> product : filteredProducts) {
+            Product tempProduct = new Product(product.get("productName"),
+                    Float.parseFloat(product.get("price")), "USD",
+                    product.get("description"),
+                    ProductCategoryDaoMem.getInstance().find(Integer.parseInt(product.get("productCategory"))),
+                    SupplierDaoMem.getInstance().find(Integer.parseInt(product.get("supplier"))),
+                    product.get("image_name"));
+            resultList.add(tempProduct);
+        }
+    }
     public void clear(){
         String query = "TRUNCATE TABLE product CASCADE ;";
         JDBCInstance.executeQuery(query);
