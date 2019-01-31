@@ -50,9 +50,14 @@ class ProductCategoryDaoMemTest{
 
     @Test
     void remove() {
+        for (int i = 1; i <= 10; i++) {
+            productCategoryDao.remove(i);
+            assertNull(productCategoryDao.find(i));
+        }
     }
 
     @Test
     void getAll() {
+
     }
 }
