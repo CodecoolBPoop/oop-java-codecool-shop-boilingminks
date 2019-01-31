@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductCategoryDaoMemTest{
 
-    private ProductCategoryDao productCategoryDao = ProductCategoryDaoMem.getInstance();
+    private ProductCategoryDao productCategoryDao = ProductCategoryDaoMem.getTestInstance();
 
     @BeforeEach
     private void setupDao(){
