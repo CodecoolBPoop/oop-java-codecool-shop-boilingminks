@@ -28,7 +28,7 @@ class SupplierDaoJDBCTest {
     }
 
     @Test
-    public void testIsWorking() {
+    public void testIsLoadAllMethodIsWorkingCorrectly() {
         ArrayList<Supplier> sl = new ArrayList<>();
         Supplier sASDF = new Supplier(1,"ASDF", "best supplier ASDF");
         Supplier sQWER = new Supplier(2, "QWER", "best supplier QWER");
