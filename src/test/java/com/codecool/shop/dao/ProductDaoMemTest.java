@@ -20,15 +20,15 @@ class ProductDaoMemTest {
 
     @BeforeEach
     private void setupDao() {
-        testSupplier = new Supplier("Amazon", "test");
-        testCategory = new ProductCategory("Tablet", "Hardware", "test");
+        testSupplier = new Supplier("testSupp", "test");
+        testCategory = new ProductCategory("testCat", "Hardware", "test");
 
         for (int i = 1; i < 20; i++) {
             productDao.remove(i);
         }
 
         for (int i = 0; i < 10; i++) {
-            Product product = new Product("test" + i, 49.9f, "USD", "test.", testCategory, testSupplier, "product_1.jpg");
+            Product product = new Product("testProd" + i, 49.9f, "USD", "test.", testCategory, testSupplier, "product_1.jpg");
             productDao.add(product);
         }
     }
@@ -40,7 +40,7 @@ class ProductDaoMemTest {
 
         for (int i = 0; i < 10; i++) {
             Product product = products.get(i);
-            assertEquals(product.getName(), "test" + i);
+            assertEquals(product.getName(), "testProd" + i);
         }
     }
 
