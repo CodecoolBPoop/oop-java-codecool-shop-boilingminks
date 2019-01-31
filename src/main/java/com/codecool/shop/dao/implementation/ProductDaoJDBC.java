@@ -32,9 +32,10 @@ public class ProductDaoJDBC implements ProductDao {
 
     @Override
     public Product find(int id) {
-        Product product;
+        List<Product> productList = new ArrayList<>();
         List<HashMap<String, String>> allProducts = JDBCInstance.executeQuerySelect("SELECT * FROM product WHERE id= '"+ Integer.toString(id) +"' ;");
-        return product;
+        productListFromHasMap(productList, allProducts);
+        return productList.get(0);
     }
 
     @Override
