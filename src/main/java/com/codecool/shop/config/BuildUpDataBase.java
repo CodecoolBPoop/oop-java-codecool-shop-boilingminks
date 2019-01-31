@@ -19,6 +19,7 @@ public class BuildUpDataBase {
     public static void buildUpDB() {
         JdbcConnectivity.getInstance().executeUpdateFromFile("sql_schema/schema.sql");
 
+
         ArrayList<Product> tempProductDS = new ArrayList<>();
         ArrayList<ProductCategory> tempProductCatDS = new ArrayList<>();
         ArrayList<Supplier> tempSupplierDS = new ArrayList<>();
@@ -56,10 +57,6 @@ public class BuildUpDataBase {
                 "Ultra thin and lightweight design, convenient to carry." +
                 "Suitable for writing and drawing, home message, etc.", tablet, mondelez, "product_10.jpg"));
 
-
-        for (Product p : tempProductDS) {
-            System.out.println(p.toString());
-        }
 
 
         SupplierDaoJDBC.getInstance().loadAll(tempSupplierDS);
