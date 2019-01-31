@@ -29,12 +29,12 @@ class SupplierDaoJDBCTest {
     @Test
     void testIsLoadAllMethodIsWorkingCorrectly() {
         ArrayList<Supplier> sl = new ArrayList<>();
-        Supplier supplierDuck = new Supplier(1,"Duck Supplier", "best duck supplier");
+        Supplier supplierDuck = new Supplier(1, "Duck Supplier", "best duck supplier");
         Supplier supplierHorse = new Supplier(2, "Horse Supplier", "best horse supplier");
         sl.add(supplierDuck);
         sl.add(supplierHorse);
         testInstance.loadAll(sl);
-        ArrayList<HashMap<String,String>> d = connInst.queryAllFromTable("supplier");
+        ArrayList<HashMap<String, String>> d = connInst.queryAllFromTable("supplier");
         d.forEach((e) -> sl.forEach((s) -> {
             if (s.getId() == Integer.parseInt(e.get("id"))) {
                 assertEquals(s.getName(), e.get("name"));
