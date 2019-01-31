@@ -114,7 +114,7 @@ public class JdbcConnectivity {
             ResultSetMetaData metaData = resultSet.getMetaData();
             while (resultSet.next()) {
                 HashMap<String, String> row = new HashMap<>();
-                for (int i = 0; i < metaData.getColumnCount(); i++) {
+                for (int i = 1; i <= metaData.getColumnCount(); i++) {
                     String columnName = metaData.getColumnName(i);
                     row.put(columnName, resultSet.getString(columnName));
                 }

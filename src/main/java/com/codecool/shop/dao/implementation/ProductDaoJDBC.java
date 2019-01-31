@@ -77,7 +77,7 @@ public class ProductDaoJDBC implements ProductDao {
 
     private void productListFromHasMap(List<Product> resultList, List<HashMap<String, String>> filteredProducts) {
         for (HashMap<String, String> product : filteredProducts) {
-            Product tempProduct = new Product(product.get("productName"),
+            Product tempProduct = new Product(Integer.parseInt(product.get("id")), product.get("name"),
                     Float.parseFloat(product.get("price")), "USD",
                     product.get("description"),
                     ProductCategoryDaoMem.getInstance().find(Integer.parseInt(product.get("category_id"))),
