@@ -6,6 +6,7 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -58,9 +59,9 @@ public class ProductDaoJDBC implements ProductDao {
         JDBCInstance.executeQuery(query);
     }
 
-    public void addAll(ProductDao productDao){
+    public void addAll(ArrayList<Product> productDao){
 
-        for (Product product:productDao.getAll()) {
+        for (Product product:productDao) {
             this.add(product);
         }
     }

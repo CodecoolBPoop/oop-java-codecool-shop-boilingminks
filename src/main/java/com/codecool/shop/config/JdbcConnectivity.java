@@ -3,6 +3,9 @@ package com.codecool.shop.config;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,5 +78,30 @@ public class JdbcConnectivity {
         return resultList;
     }
 
+    public void executeUpdate(String query) throws SQLException {
+        try (Connection connection = getConnection()) {
+
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.executeUpdate();
+
+        } catch (SQLTimeoutException e) {
+            System.err.println("ERROR: SQL Timeout");
+        }
+    }
+
+    public void executeUpdateFromFile(String filePath) {
+        String query = "";
+        try {
+            query = new String(Files.readAllBytes(Paths.get(filePath)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
