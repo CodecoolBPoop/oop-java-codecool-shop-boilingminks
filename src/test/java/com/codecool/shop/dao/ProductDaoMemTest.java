@@ -48,15 +48,13 @@ class ProductDaoMemTest {
     void testFind() {
 
         for (int i = 0; i < 20; i++) {
-            if (i == 0){
+            if (i == 0) {
                 assertThrows(IllegalArgumentException.class, () -> {
                     productDao.find(0);
                 });
-            }
-            else if (i <= 10){
+            } else if (i <= 10) {
                 assertNotNull(productDao.find(i));
-            }
-            else {
+            } else {
                 assertNull(productDao.find(i));
             }
         }
@@ -77,7 +75,7 @@ class ProductDaoMemTest {
         for (int i = 0; i < 10; i++) {
             Product actual = actuals.get(i);
 
-            Product expected = productDao.find(i+1);
+            Product expected = productDao.find(i + 1);
             assertEquals(expected, actual);
         }
     }

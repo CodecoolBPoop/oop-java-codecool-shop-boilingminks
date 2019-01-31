@@ -9,12 +9,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProductCategoryDaoMemTest{
+class ProductCategoryDaoMemTest {
 
     private ProductCategoryDao productCategoryDao = ProductCategoryDaoMem.getTestInstance();
 
     @BeforeEach
-    private void setupDao(){
+    private void setupDao() {
 
         for (int i = 1; i < 20; i++) {
             productCategoryDao.remove(i);
@@ -36,15 +36,13 @@ class ProductCategoryDaoMemTest{
     @Test
     void testFind() {
         for (int i = 0; i < 20; i++) {
-            if (i == 0){
+            if (i == 0) {
                 assertThrows(IllegalArgumentException.class, () -> {
                     productCategoryDao.find(0);
                 });
-            }
-            else if (i <= 10){
+            } else if (i <= 10) {
                 assertNotNull(productCategoryDao.find(i));
-            }
-            else {
+            } else {
                 assertNull(productCategoryDao.find(i));
             }
         }
@@ -64,7 +62,7 @@ class ProductCategoryDaoMemTest{
         for (int i = 0; i < 10; i++) {
             ProductCategory actual = actuals.get(i);
 
-            ProductCategory expected = productCategoryDao.find(i+1);
+            ProductCategory expected = productCategoryDao.find(i + 1);
             assertEquals(expected, actual);
         }
     }
