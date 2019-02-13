@@ -27,10 +27,14 @@ public class UserDaoJDBC implements UserDao {
     }
 
     @Override
-    public User find(String email) {
-        List<HashMap<String, String>> hashMaps = JDBCInstance.executeQuerySelect("SELECT * FROM users WHERE email= '"+ email +"' ;");
-        List<User> users= getUserListFromHashMap(hashMaps);
-        return users.get(0);
+    public User findByEmail(String email) {
+        try {
+            List<HashMap<String, String>> hashMaps = JDBCInstance.executeQuerySelect("SELECT * FROM users WHERE email= '" + email + "' ;");
+            List<User> users = getUserListFromHashMap(hashMaps);
+            return users.get(0);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("email isn't found!");
+        }
     }
 
     @Override

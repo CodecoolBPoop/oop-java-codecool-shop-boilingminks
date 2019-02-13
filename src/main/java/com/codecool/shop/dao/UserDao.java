@@ -7,9 +7,10 @@ import java.util.List;
 public interface UserDao {
 
     void add(User user);
-    User find(String email);
-    void remove(int id);
 
+    User findByEmail(String email);
+
+    void remove(int id);
 
     List<User> getAll();
 
