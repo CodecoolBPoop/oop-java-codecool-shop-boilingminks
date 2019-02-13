@@ -57,4 +57,8 @@ public class User {
         return country;
     }
 
+    @Override
+    public String toString() {
+        return getEmail() + " " + getFirstName() + " " + getLastName();
+    }
 }
