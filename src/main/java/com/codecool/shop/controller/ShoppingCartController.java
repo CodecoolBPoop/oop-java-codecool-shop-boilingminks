@@ -33,7 +33,6 @@ public class ShoppingCartController extends HttpServlet {
         int userId = 1; // TODO: USER SYSTEM
         float sumOfPrices = 0;
         Map<Integer, Integer> userCart = shoppingCarts.getAll().get(userId);
-        System.out.println(userCart);
         if (stringItemId != null) {
 
             updateCart(userId, shoppingCarts, stringItemId, userCart);

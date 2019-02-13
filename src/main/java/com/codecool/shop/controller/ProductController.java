@@ -14,14 +14,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Map;
+
+import static java.lang.System.out;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+        HttpSession session = request.getSession(true);
 
         ProductDao productDataStore = ProductDaoJDBC.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
@@ -43,6 +50,41 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+        HttpSession session = req.getSession(false);
+        System.out.println(session);
+        Enumeration<String> parameterNames = req.getParameterNames();
+
+        while (parameterNames.hasMoreElements()) {
+
+            String paramName = parameterNames.nextElement();
+            out.print(paramName);
+            out.print("\n");
+
+            String[] paramValues = req.getParameterValues(paramName);
+            for (int i = 0; i < paramValues.length; i++) {
+                String paramValue = paramValues[i];
+                out.print(paramName + " -> " + paramValue);
+                out.print("\n");
+            }
+
+        }
+
+
+
+        Enumeration attributeNames = (session.getAttributeNames());
+
+        while ( attributeNames.hasMoreElements())
+        {
+            Object tring;
+            if((tring = attributeNames.nextElement())!=null)
+            {
+                out.println(session.getValue((String) tring));
+                out.println("\n");
+            }
+
+        }
 
         ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
 
