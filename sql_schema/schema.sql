@@ -10,15 +10,13 @@ CREATE TABLE IF NOT EXISTS
 users (id SERIAL PRIMARY KEY,
       first_name VARCHAR NOT NULL,
       last_name VARCHAR NOT NULL,
-      email VARCHAR NOT NULL,
-      password VARCHAR NOT NULL,
+      email VARCHAR NOT NULL UNIQUE,
+      hashed_password VARCHAR NOT NULL,
       address VARCHAR NOT NULL,
-      address2 VARCHAR NOT NULL,
       state VARCHAR NOT NULL,
       zip VARCHAR NOT NULL,
       country VARCHAR NOT NULL,
-      shipping VARCHAR NOT NULL,
-      saveInfo BOOLEAN NOT NULL);
+      is_admin BOOLEAN NOT NULL);
 
 CREATE TABLE IF NOT EXISTS
 product (id SERIAL PRIMARY KEY NOT NULL,
