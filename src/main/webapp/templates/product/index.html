@@ -41,6 +41,9 @@
 <body>
 
 <div th:replace="header.html :: copy"></div>
+<div>
+    <p th:if="${#session == null}"> hgfhgdhgdhgdhgf</p>
+</div>
 <div th:if="${userID==1}">
     <form action="/admin" method="get">
     <button type="submit" class="fa-2x">

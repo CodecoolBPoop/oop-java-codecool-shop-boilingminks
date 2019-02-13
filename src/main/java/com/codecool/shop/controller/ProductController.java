@@ -27,8 +27,11 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(false);
+        System.out.println("session id = "+session);
+        printRequest(request);
+        printSession(session);
+        System.out.println("----------");
 
         ProductDao productDataStore = ProductDaoJDBC.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
@@ -48,21 +51,32 @@ public class ProductController extends HttpServlet {
         engine.process("product/index.html", context, response.getWriter());
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void printSession(HttpSession session) {
+        System.out.println("session:");
+        if (session!=null){
 
+            Enumeration attributeNames = (session.getAttributeNames());
+            while ( attributeNames.hasMoreElements())
+            {
+                Object tring;
+                if((tring = attributeNames.nextElement())!=null)
+                {
+                    out.println(tring+" -> "+session.getValue((String) tring));
+                    out.println("\n");
+                }
 
-        HttpSession session = req.getSession(false);
-        System.out.println(session);
-        Enumeration<String> parameterNames = req.getParameterNames();
+            }
+        }
+    }
 
+    private void printRequest(HttpServletRequest request) {
+        System.out.println("request:");
+        Enumeration<String> parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
 
             String paramName = parameterNames.nextElement();
-            out.print(paramName);
-            out.print("\n");
 
-            String[] paramValues = req.getParameterValues(paramName);
+            String[] paramValues = request.getParameterValues(paramName);
             for (int i = 0; i < paramValues.length; i++) {
                 String paramValue = paramValues[i];
                 out.print(paramName + " -> " + paramValue);
@@ -70,21 +84,11 @@ public class ProductController extends HttpServlet {
             }
 
         }
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-        Enumeration attributeNames = (session.getAttributeNames());
-
-        while ( attributeNames.hasMoreElements())
-        {
-            Object tring;
-            if((tring = attributeNames.nextElement())!=null)
-            {
-                out.println(session.getValue((String) tring));
-                out.println("\n");
-            }
-
-        }
 
         ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
 
