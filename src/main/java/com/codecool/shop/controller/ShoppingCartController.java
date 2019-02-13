@@ -1,12 +1,9 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoJDBC;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
@@ -18,9 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/shoppingcart"})
@@ -41,7 +36,7 @@ public class ShoppingCartController extends HttpServlet {
         System.out.println(userCart);
         if (stringItemId != null) {
 
-            updateCart(shoppingCarts, stringItemId, userCart);
+            updateCart(userId, shoppingCarts, stringItemId, userCart);
         }
         if (userCart != null) {
 
@@ -70,16 +65,16 @@ public class ShoppingCartController extends HttpServlet {
 
     }
 
-    public static void updateCart(ShoppingCartDao shoppingCartDao, String stringItemId, Map<Integer, Integer> userCart) {
+    public static void updateCart(int userId, ShoppingCartDao shoppingCartDao, String stringItemId, Map<Integer, Integer> userCart) {
         Integer itemId = Integer.valueOf(stringItemId);
         if (itemId < 0) {
             itemId = Math.abs(itemId);
-            shoppingCartDao.update(itemId, -1);
+            shoppingCartDao.update(userId, itemId, -1);
             if (userCart.get(itemId) < 1) {
                 userCart.remove(itemId);
             }
         } else {
-            shoppingCartDao.update(itemId, 1);
+            shoppingCartDao.update(userId, itemId, 1);
         }
     }
 
@@ -94,7 +89,7 @@ public class ShoppingCartController extends HttpServlet {
         Map<Integer, Integer> userCart = shoppingCartDao.getAll().get(userId);
 
         if (stringItemId != null) {
-            ShoppingCartController.updateCart(shoppingCartDao, stringItemId, userCart);
+            ShoppingCartController.updateCart(userId, shoppingCartDao, stringItemId, userCart);
         }
 
         resp.sendRedirect("/shoppingcart");

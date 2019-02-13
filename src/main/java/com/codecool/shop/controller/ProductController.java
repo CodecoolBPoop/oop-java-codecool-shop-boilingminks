@@ -52,7 +52,7 @@ public class ProductController extends HttpServlet {
         Map<Integer, Integer> userCart = shoppingCartDao.getAll().get(userId);
 
         if (stringItemId != null) {
-            ShoppingCartController.updateCart(shoppingCartDao, stringItemId, userCart);
+            ShoppingCartController.updateCart(userId, shoppingCartDao, stringItemId, userCart);
         }
 
         resp.sendRedirect("/");
