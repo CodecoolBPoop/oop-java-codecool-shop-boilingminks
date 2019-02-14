@@ -13,6 +13,9 @@ public class UserDaoJDBC implements UserDao {
 
     private JdbcConnectivity JDBCInstance = JdbcConnectivity.getInstance();
 
+    private UserDaoJDBC(){
+    }
+
     public static UserDaoJDBC getInstance() {
         if (instance == null) {
             instance = new UserDaoJDBC();
@@ -28,13 +31,13 @@ public class UserDaoJDBC implements UserDao {
 
     @Override
     public User findByEmail(String email) {
-        try {
-            List<HashMap<String, String>> hashMaps = JDBCInstance.executeQuerySelect("SELECT * FROM users WHERE email= '" + email + "';");
-            List<User> users = getUserListFromHashMap(hashMaps);
-            return users.get(0);
-        } catch (Exception e) {
-            e.printStackTrace();
+        List<HashMap<String, String>> hashMaps = JDBCInstance.executeQuerySelect("SELECT * FROM users WHERE email= '" + email + "' ;");
+        List<User> users = getUserListFromHashMap(hashMaps);
+        if (users.isEmpty()) {
             throw new IllegalArgumentException("email isn't found!");
+        }
+        else {
+            return users.get(0);
         }
     }
 
@@ -59,7 +62,6 @@ public class UserDaoJDBC implements UserDao {
                     hashMap.get("hashed_password"), hashMap.get("address"), hashMap.get("state"),
                     hashMap.get("zip"), hashMap.get("country"), isAdmin);
             resultList.add(user);
-
         }
         return resultList;
     }
