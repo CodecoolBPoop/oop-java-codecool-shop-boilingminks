@@ -18,6 +18,7 @@ public class Order {
     private int id;
     private User user;
     private Transaction transaction;
+    private PaymentMethod paymentMethod;
 
     private Map<Integer, Integer> shoppingCart;
 
@@ -50,11 +51,15 @@ public class Order {
         });
     }
 
+    public String getPaymentMethod() {
+        return paymentMethod.toString();
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
 
-    public void setShoppingCart(int userId){
+    public void setShoppingCart(int userId) {
         ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
         shoppingCart = shoppingCartDao.getAll().get(userId);
     }
@@ -69,7 +74,10 @@ public class Order {
         writer.close();
     }
 
-    public void setTransaction(Transaction tran) { this.transaction = tran; }
+    public void setTransaction(Transaction tran) {
+        this.transaction = tran;
+        this.paymentMethod = tran.getPaymentMethod();
+    }
 
     public Map<Integer, Integer> getShoppingCart() {
         return shoppingCart;
