@@ -3,6 +3,14 @@
 <body>
 <div th:fragment="copy">
     <script src=static/js/index.js defer></script>
+
+    <div th:if="${#session != null}">
+        <button class="btn btn-danger" id="myBtn">Sign Out</button>
+    </div>
+    <div th:if="${#session == null}">
+        <button class="btn btn-warning" id="signup" data-toggle="modal" data-target="#signupmodal">Sign Up</button>
+        <button class="btn btn-primary" id="signin" data-toggle="modal" data-target="#signinmodal">Sign In</button>
+    </div>
     <div class="jumbotron text-center">
         <!--<div id="animate"></div>-->
         <form action="/shoppingcart" method="get">

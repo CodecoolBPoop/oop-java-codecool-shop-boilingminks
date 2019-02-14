@@ -39,16 +39,12 @@
 </head>
 
 <body>
-
 <div th:replace="header.html :: copy"></div>
-<div>
-    <p th:if="${#session == null}"> hgfhgdhgdhgdhgf</p>
-</div>
 <div th:if="${userID==1}">
     <form action="/admin" method="get">
-    <button type="submit" class="fa-2x">
-        <i class="fas fa-toolbox"></i>
-    </button>
+        <button type="submit" class="fa-2x">
+            <i class="fas fa-toolbox"></i>
+        </button>
     </form>
 </div>
 <div class="container">
@@ -81,13 +77,16 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <form method="post" action="/">
-                            <button class="btn btn-success" name="changeCart" type="submit" th:value="${prod.getId()}">
-                                <div class="fa-2x">
-                                    <i class="fas fa-cart-plus"></i>
-                                </div>
-                            </button>
-                        </form>
+                        <div th:if="${#session != null}">
+                            <form method="post" action="/">
+                                <button class="btn btn-success" name="changeCart" type="submit"
+                                        th:value="${prod.getId()}">
+                                    <div class="fa-2x">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </div>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -97,5 +96,49 @@
     </div>
 </div>
 <div th:replace="footer.html :: copy"></div>
+
+
+<!-- The Modal -->
+<div id="signinmodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="fa-2x">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>PLEASE SIGN IN</h3>
+                </div>
+                <div class="modal-body">
+                    <input name="email" type="email" placeholder="email address">
+                    <input name=password type="password" placeholder="password">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit" name="signin"><i class="far fa-check-circle"></i></button>
+                    <span class="close"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- The Modal -->
+<div id="signupmodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="fa-2x">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>PLEASE SIGN UP</h3>
+                </div>
+                <div class="modal-body">
+                    <input name="email" type="email" placeholder="email address">
+                    <input name=password type="password" placeholder="password">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit" name="signup"><i class="far fa-check-circle"></i></button>
+                    <span class="close"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

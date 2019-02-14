@@ -32,7 +32,11 @@ public class ProductController extends HttpServlet {
         printRequest(request);
         printSession(session);
         System.out.println("----------");
+        String sessionId = null;
 
+        if(session != null) {
+            sessionId = session.getId();
+        }
         ProductDao productDataStore = ProductDaoJDBC.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
@@ -48,6 +52,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("categories", productCategoryDataStore.getAll());
         context.setVariable("suppliers", supplierDataStore.getAll());
         context.setVariable("userID", userId);
+        context.setVariable("sessionId", sessionId);
         engine.process("product/index.html", context, response.getWriter());
     }
 

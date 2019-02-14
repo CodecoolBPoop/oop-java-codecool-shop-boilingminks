@@ -63,10 +63,10 @@
 
 .jumbotron
 {
-    background-image: url('../img/minklogo.jpg');
+    /*background-image: url('../img/minklogo.jpg');*/
     height: 280px;
     background-repeat: no-repeat;
-    background-size: 100% 280px;
+    /*background-size: 100% 280px;*/
     }
 
 .circle {
@@ -96,3 +96,11 @@ body{
     position: absolute;
     background-image: url("/static/img/minkan.png");
 }
+
+.modal-header{
+    background-color: #4CAF50;
+}
+
+/*.modal-footer{*/
+    /*background-color: #4CAF50;*/
+/*}*/
