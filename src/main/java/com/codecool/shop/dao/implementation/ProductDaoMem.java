@@ -14,6 +14,7 @@ public class ProductDaoMem implements ProductDao {
 
     private List<Product> data = new ArrayList<>();
     private static ProductDaoMem instance = null;
+    private static ProductDaoMem testInstance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
@@ -27,6 +28,13 @@ public class ProductDaoMem implements ProductDao {
         return instance;
     }
 
+    public static ProductDaoMem getTestInstance() {
+        if (testInstance == null) {
+            testInstance = new ProductDaoMem();
+        }
+        return testInstance;
+    }
+
     @Override
     public void add(Product product) {
         product.setId(data.size() + 1);
@@ -35,7 +43,12 @@ public class ProductDaoMem implements ProductDao {
 
     @Override
     public Product find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        if (id <= 0){
+            throw new IllegalArgumentException("Integer must be more than 0!");
+        }
+        else {
+            return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        }
     }
 
     @Override

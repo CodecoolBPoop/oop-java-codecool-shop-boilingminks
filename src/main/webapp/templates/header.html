@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="copy">
+    <script src=static/js/index.js defer></script>
+
+    <div th:if="${#session != null}">
+        <form action="/logout" , method="post">
+            <button type="submit" class="btn btn-danger" id="myBtn">Sign Out</button>
+        </form>
+    </div>
+    <div th:if="${#session == null}">
+        <button class="btn btn-warning" id="signup" data-toggle="modal" data-target="#signupmodal">Sign Up</button>
+        <button class="btn btn-primary" id="signin" data-toggle="modal" data-target="#signinmodal">Sign In</button>
+    </div>
+    <div class="jumbotron text-center">
+        <!--<div id="animate"></div>-->
+        <form action="/shoppingcart" method="get">
+            <button type="submit" class="btn btn-default btn-lg" style="float: right;">
+                <div class="fa-4x">
+                    <span class="fa-layers fa-fw">
+                        <i class="fas fa-shopping-cart"></i>
+                        <div th:if="${sum_of_items>0}">
+                        <span class="fa-layers-counter" style="background:red" th:text="${sum_of_items}">SUM</span>
+                        </div>
+                </span>
+                </div>
+            </button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

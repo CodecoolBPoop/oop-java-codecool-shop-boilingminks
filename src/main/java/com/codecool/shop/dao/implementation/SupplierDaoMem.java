@@ -10,9 +10,8 @@ public class SupplierDaoMem implements SupplierDao {
 
     private List<Supplier> data = new ArrayList<>();
     private static SupplierDaoMem instance = null;
+    private static SupplierDaoMem testInstance = null;
 
-    /* A private Constructor prevents any other class from instantiating.
-     */
     private SupplierDaoMem() {
     }
 
@@ -23,6 +22,13 @@ public class SupplierDaoMem implements SupplierDao {
         return instance;
     }
 
+    public static SupplierDaoMem getTestInstance() {
+        if (testInstance == null) {
+            testInstance = new SupplierDaoMem();
+        }
+        return testInstance;
+    }
+
     @Override
     public void add(Supplier supplier) {
         supplier.setId(data.size() + 1);
@@ -31,7 +37,11 @@ public class SupplierDaoMem implements SupplierDao {
 
     @Override
     public Supplier find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        if (id <= 0) {
+            throw new IllegalArgumentException("Integer must be more than 0!");
+        } else {
+            return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        }
     }
 
     @Override

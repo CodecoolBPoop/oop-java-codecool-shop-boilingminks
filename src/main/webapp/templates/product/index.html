@@ -1,11 +1,19 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta name="author" content="Codecool" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" href="static/img/favico.png" type="image/x-icon"/>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>Codecool Shop</title>
+    <title>BoilingMinks Shop</title>
+
+    <!-- Font Awsome call -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
+            integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
+            crossorigin="anonymous"></script>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -14,35 +22,52 @@
 
     <!--Latest compiled and minified Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
 
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 </head>
 
 <body>
-
-<div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+<div th:replace="header.html :: copy"></div>
+<div th:if="${isAdmin}">
+    <form action="/admin" method="get">
+        <button type="submit" class="fa-2x">
+            <i class="fas fa-toolbox"></i>
+        </button>
+    </form>
 </div>
-
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+    <div class="row">
+        <div th:each="supp, iterStat : ${suppliers}" th:value="${supp.id}" class="col-sm-3">
+            <div class="card text-center">
+                <a th:href="@{/prod-by-supp(id=${supp.id})}"><strong th:text="${supp.name}">Supplier Name</strong></a>
+            </div>
+        </div>
     </div>
-
-    <div id="products" class="row">
+    <p></p>
+    <div class="row">
+        <div th:each="category: ${categories}" class="col-sm-3">
+            <div class="card text-center">
+                <a th:href="@{/filter(cat=${category.name})}"><strong th:text="${category.name}">Category Title</strong></a>
+            </div>
+        </div>
+    </div>
+    <div id="products" class="row mt-4">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                <img class="" src="http://placehold.it/400x250/000/fff" height="250"
+                     th:attr="src='/static/img/' + ${prod.getImageName()}" alt=""/>
                 <div class="card-header">
                     <h4 class="card-title" th:text="${prod.name}">Product name</h4>
                     <p class="card-text" th:text="${prod.description}">Product description... </p>
@@ -52,16 +77,77 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <div th:if="${#session != null}">
+                            <form method="post" action="/">
+                                <button class="btn btn-success" name="changeCart" type="submit"
+                                        th:value="${prod.getId()}">
+                                    <div class="fa-2x">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </div>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+            <p></p>
+            <p></p>
         </div>
     </div>
-
 </div>
-
 <div th:replace="footer.html :: copy"></div>
 
+
+<!-- The Modal -->
+<div id="signinmodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="fa-2x">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <form action="/login" method="post">
+                    <div class="modal-header">
+                        <h3>PLEASE SIGN IN</h3>
+                    </div>
+                    <div class="modal-body">
+
+                        <input id="email" name="email" type="email" placeholder="email address">
+                        <input name=password type="password" placeholder="password">
+                    </div>
+                    <div class="modal-footer">
+
+                        <button class="btn btn-success" type="submit" name="signin"><i class="far fa-check-circle"></i>
+                        </button>
+                        <span class="close"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- The Modal -->
+<div id="signupmodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="fa-2x">
+            <!-- Modal content -->
+            <form action="/registration" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>PLEASE SIGN UP</h3>
+                    </div>
+                    <div class="modal-body">
+                        <input name="email" type="email" placeholder="email address">
+                        <input name=password type="password" placeholder="password">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" type="submit" name="signup">
+                            <i class="far fa-check-circle"></i>
+                        </button>
+                        <span class="close"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

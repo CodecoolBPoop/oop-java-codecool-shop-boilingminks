@@ -60,3 +60,47 @@
 {
     margin: 0 0 11px;
 }
+
+.jumbotron
+{
+    /*background-image: url('../img/minklogo.jpg');*/
+    height: 280px;
+    background-repeat: no-repeat;
+    /*background-size: 100% 280px;*/
+    }
+
+.circle {
+    background: #f00;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+body{
+    background-color: #4CAF50;
+}
+
+.cart{
+    color: red;
+    font-weight: bold;
+}
+
+.emptycart{
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+#animate{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background-image: url("/static/img/minkan.png");
+}
+
+.modal-header{
+    background-color: #4CAF50;
+}
+
+/*.modal-footer{*/
+    /*background-color: #4CAF50;*/
+/*}*/
