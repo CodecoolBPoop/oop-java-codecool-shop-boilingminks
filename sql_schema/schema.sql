@@ -8,15 +8,15 @@ DROP TABLE IF EXISTS orders CASCADE ;
 
 CREATE TABLE IF NOT EXISTS
 users (id SERIAL PRIMARY KEY,
-      first_name VARCHAR NOT NULL,
-      last_name VARCHAR NOT NULL,
-      email VARCHAR NOT NULL UNIQUE,
-      hashed_password VARCHAR NOT NULL,
-      address VARCHAR NOT NULL,
-      state VARCHAR NOT NULL,
-      zip VARCHAR NOT NULL,
-      country VARCHAR NOT NULL,
-      is_admin BOOLEAN NOT NULL);
+          first_name VARCHAR,
+          last_name VARCHAR,
+          email VARCHAR NOT NULL UNIQUE,
+          hashed_password VARCHAR NOT NULL,
+          address VARCHAR,
+          state VARCHAR,
+          zip VARCHAR,
+          country VARCHAR,
+          is_admin BOOLEAN NOT NULL);
 
 CREATE TABLE IF NOT EXISTS
 product (id SERIAL PRIMARY KEY NOT NULL,
