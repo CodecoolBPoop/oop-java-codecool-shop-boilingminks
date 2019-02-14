@@ -47,7 +47,7 @@ public class CheckoutController extends HttpServlet {
             if (isExistingEmail(email)) {
                 System.err.println("This email already exists!");
             }
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             userDao.add(testUser);
         }
         // END OF USER CREATION
