@@ -24,12 +24,9 @@ public class Registration extends HttpServlet {
         User tempUser = new User(emailAddress, password);
         UserDao userdao = UserDaoJDBC.getInstance();
 
-        if(userdao.isExistingEmail(emailAddress)){
-           resp.sendRedirect("/");
-        }else{
+        if (!userdao.isExistingEmail(emailAddress)) {
             userdao.add(tempUser);
             SessionController.createSession(req, emailAddress, tempUser);
-            resp.sendRedirect("/");
         }
         resp.sendRedirect("/");
     }

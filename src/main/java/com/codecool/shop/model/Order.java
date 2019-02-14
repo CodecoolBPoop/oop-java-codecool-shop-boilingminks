@@ -15,7 +15,8 @@ import java.util.Map;
 
 public class Order {
     public static Order currentOrder;
-    private int id;
+    private static int uniqId = 1;
+    private int id = uniqId++;
     private User user;
     private Transaction transaction;
     private PaymentMethod paymentMethod;
@@ -33,9 +34,9 @@ public class Order {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public static void updateWithCheckout(HashMap<String, String> checkoutData, Object updatedClass) {
         checkoutData.entrySet().stream().forEach(e -> {
@@ -59,9 +60,13 @@ public class Order {
         this.user = user;
     }
 
-    public void setShoppingCart(int userId) {
+    public void setShoppingCartToUser(int userId) {
         ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
         shoppingCart = shoppingCartDao.getAll().get(userId);
+    }
+
+    public void setShoppingCart(Map<Integer, Integer> shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 
     public void saveToJson() throws IOException {

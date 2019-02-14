@@ -67,7 +67,7 @@ public class UserDaoJDBC implements UserDao {
             if (hashMap.get("is_admin").equals("t")) {
                 isAdmin = true;
             }
-            User user = new User(hashMap.get("first_name"), hashMap.get("last_name"), hashMap.get("email"),
+            User user = new User(Integer.parseInt(hashMap.get("id")),hashMap.get("first_name"), hashMap.get("last_name"), hashMap.get("email"),
                     hashMap.get("hashed_password"), hashMap.get("address"), hashMap.get("state"),
                     hashMap.get("zip"), hashMap.get("country"), isAdmin);
             resultList.add(user);

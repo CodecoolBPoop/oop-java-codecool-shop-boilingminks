@@ -32,7 +32,7 @@ public class User {
         this.is_admin = is_admin;
     }
 
-    public User(int id, String firstName, String lastName, String email, String hashedPassword, String address, String state, String zip, String country) {
+    public User(int id, String firstName, String lastName, String email, String hashedPassword, String address, String state, String zip, String country, boolean is_admin) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,6 +42,7 @@ public class User {
         this.state = state;
         this.zip = zip;
         this.country = country;
+        this.is_admin = is_admin;
     }
 
     public int getId() {

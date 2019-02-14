@@ -25,8 +25,15 @@ public class OrderDaoJDBC implements OrderDao {
 
     @Override
     public void add(Order order) {
-        JDBCInstance.executeQuery("INSERT INTO orders (user_id, validated, payment_method)" +
-                "VALUES ('" + order.getUser().getId() + "', '" + "true" + "', '" + order.getPaymentMethod() + "');");
+        System.out.println(order.getShoppingCart().toString());
+        JDBCInstance.executeQuery("INSERT INTO orders (id, user_id, validated, payment_method)" +
+                "VALUES ('" + order.getId() + "', '" + order.getUser().getId() + "', '" + "true" + "', '" + order.getPaymentMethod() + "');");
+        System.out.println(order.getId());
+        for(Integer key : order.getShoppingCart().keySet()) {
+            JDBCInstance.executeQuery("INSERT INTO shopping_cart (order_id, product_id, quantity)" +
+            "VALUES ('" + order.getId() + "','" + key + "','" + order.getShoppingCart().get(key) + "');");
+        }
+
     }
 
     @Override

@@ -45,7 +45,7 @@ shopping_cart (order_id int NOT NULL,
          quantity int NOT NULL);
 
 CREATE TABLE IF NOT EXISTS
-orders (id SERIAL PRIMARY KEY NOT NULL,
+orders (id INT PRIMARY KEY NOT NULL,
         user_id int NOT NULL,
         validated BOOLEAN NOT NULL,
 	payment_method VARCHAR NOT NULL);

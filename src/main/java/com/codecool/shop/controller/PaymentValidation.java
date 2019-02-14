@@ -1,6 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.dao.implementation.OrderDaoJDBC;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
@@ -49,11 +50,13 @@ public class PaymentValidation extends HttpServlet {
             e.printStackTrace();
         }
 
+        orderDao.add(currentOrder);
+
+
         currentOrder.getShoppingCart().clear();
         ShoppingCartDaoMem.getInstance().getSumOfItems().clear();
         ShoppingCartDaoMem.getInstance().getSumOfItems().put(userId, 0);
 
-        orderDao.add(currentOrder);
 
         resp.sendRedirect("/");
 
