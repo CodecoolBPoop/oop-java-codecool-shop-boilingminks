@@ -28,14 +28,10 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        System.out.println("session id = "+session);
-        printRequest(request);
-        printSession(session);
-        System.out.println("----------");
-        String sessionId = null;
+        boolean isAdmin = false;
 
         if(session != null) {
-            sessionId = session.getId();
+            isAdmin = (boolean) session.getAttribute("userIsAdmin");
         }
         ProductDao productDataStore = ProductDaoJDBC.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
@@ -52,7 +48,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("categories", productCategoryDataStore.getAll());
         context.setVariable("suppliers", supplierDataStore.getAll());
         context.setVariable("userID", userId);
-        context.setVariable("sessionId", sessionId);
+        context.setVariable("isAdmin", isAdmin);
         engine.process("product/index.html", context, response.getWriter());
     }
 

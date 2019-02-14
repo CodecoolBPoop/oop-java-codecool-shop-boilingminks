@@ -1,5 +1,9 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.implementation.UserDaoJDBC;
+import com.codecool.shop.model.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,11 +18,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-        System.out.println("get");
-        resp.sendRedirect("/");
-
-
+        System.out.println("error");
     }
 
     @Override
@@ -27,18 +27,25 @@ public class Login extends HttpServlet {
         String username = req.getParameter("email");
         String password = req.getParameter("password");
 
+        UserDao userdao = UserDaoJDBC.getInstance();
+
+        try {
+            User user = userdao.findByEmail(username);
+
+            if(password.equals(user.getHashedPassword())){
+                HttpSession session = req.getSession(true);
+
+                session.setAttribute("email", username);
+                session.setAttribute("userIsAdmin", user.is_admin());
+            }else {
+                System.out.println("TRY AGAIN!");
+            }
 
 
-        HttpSession session = req.getSession(true);
-        session.setAttribute("methodIUsed","it was get");
-        System.out.println("email prm from request: "+req.getParameter("email"));
+        }catch (IllegalArgumentException e){
+            e.printStackTrace();
+        }
 
-
-        session.setAttribute("email",req.getParameter("email"));
-        session.setAttribute("password",req.getParameter("password"));
-
-
-        System.out.println("post");
         resp.sendRedirect("/");
 
     }

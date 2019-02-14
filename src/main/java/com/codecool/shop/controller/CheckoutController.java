@@ -38,7 +38,7 @@ public class CheckoutController extends HttpServlet {
         String state = req.getParameter("state");
         String zip = req.getParameter("zip");
         String country = req.getParameter("country");
-        User testUser = new User(firstName, lastName, email, "notyet", address, state, zip, country);
+        User testUser = new User(firstName, lastName, email, "notyet", address, state, zip, country, false);
 
         // USER CREATION IN SQL (needs userdao)
         try {

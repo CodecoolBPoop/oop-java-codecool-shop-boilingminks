@@ -29,10 +29,11 @@ public class UserDaoJDBC implements UserDao {
     @Override
     public User findByEmail(String email) {
         try {
-            List<HashMap<String, String>> hashMaps = JDBCInstance.executeQuerySelect("SELECT * FROM users WHERE email= '" + email + "' ;");
+            List<HashMap<String, String>> hashMaps = JDBCInstance.executeQuerySelect("SELECT * FROM users WHERE email= '" + email + "';");
             List<User> users = getUserListFromHashMap(hashMaps);
             return users.get(0);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new IllegalArgumentException("email isn't found!");
         }
     }
@@ -50,10 +51,15 @@ public class UserDaoJDBC implements UserDao {
     private List<User> getUserListFromHashMap(List<HashMap<String, String>> hashMaps) {
         List<User> resultList = new ArrayList<>();
         for (HashMap<String, String> hashMap : hashMaps) {
+            boolean isAdmin = false;
+            if(hashMap.get("is_admin").equals("t")){
+                isAdmin = true;
+            }
             User user = new User(hashMap.get("first_name"), hashMap.get("last_name"), hashMap.get("email"),
                     hashMap.get("hashed_password"), hashMap.get("address"), hashMap.get("state"),
-                    hashMap.get("zip"), hashMap.get("country"));
+                    hashMap.get("zip"), hashMap.get("country"), isAdmin);
             resultList.add(user);
+
         }
         return resultList;
     }
