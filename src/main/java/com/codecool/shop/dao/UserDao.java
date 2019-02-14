@@ -10,6 +10,8 @@ public interface UserDao {
 
     User findByEmail(String email);
 
+    boolean isExistingEmail(String email);
+
     void remove(int id);
 
     List<User> getAll();

@@ -41,16 +41,6 @@ public class CheckoutController extends HttpServlet {
         User testUser = new User(firstName, lastName, email, "notyet", address, state, zip, country, false);
 
         // USER CREATION IN SQL (needs userdao)
-        try {
-
-            // BOOLEAN IN STATEMENT IS A PRIVATE METHOD, MOVE IT AS WELL
-            if (isExistingEmail(email)) {
-                System.err.println("This email already exists!");
-            }
-        } catch (IllegalArgumentException e) {
-            userDao.add(testUser);
-        }
-        // END OF USER CREATION
 
         HashMap<String, String> checkoutData = new HashMap<>();
         checkoutData.put("firstName", firstName);
@@ -67,13 +57,6 @@ public class CheckoutController extends HttpServlet {
         Order.currentOrder.setShoppingCart(1);
         resp.sendRedirect("/payment-choice");
     }
-
-    private boolean isExistingEmail(String email) {
-        UserDao userDao = UserDaoJDBC.getInstance();
-        String email1 = userDao.findByEmail(email).getEmail();
-        return email.equals(email1);
-    }
-
 
 }
 

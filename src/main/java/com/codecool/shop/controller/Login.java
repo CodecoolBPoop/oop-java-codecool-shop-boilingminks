@@ -24,26 +24,22 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String username = req.getParameter("email");
+        String emailAddress = req.getParameter("email");
         String password = req.getParameter("password");
 
         UserDao userdao = UserDaoJDBC.getInstance();
 
         try {
-            User user = userdao.findByEmail(username);
+            User user = userdao.findByEmail(emailAddress);
 
             if(password.equals(user.getHashedPassword())){
-                HttpSession session = req.getSession(true);
-
-                session.setAttribute("email", username);
-                session.setAttribute("userIsAdmin", user.is_admin());
+                SessionController.createSession(req, emailAddress, user);
             }else {
                 System.out.println("TRY AGAIN!");
             }
 
-
         }catch (IllegalArgumentException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         resp.sendRedirect("/");

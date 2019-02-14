@@ -48,6 +48,11 @@ public class User {
         return id;
     }
 
+    public User(String email, String hashedPassword) {
+        this.email = email;
+        this.hashedPassword = hashedPassword;
+    }
+
     public String getEmail() {
         return email;
     }

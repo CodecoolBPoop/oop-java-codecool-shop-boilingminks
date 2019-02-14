@@ -22,7 +22,7 @@ public class Initializer implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
 
         // Fill up the DB with basic products.
-//        BuildUpDataBase.buildUpDB();
+        BuildUpDataBase.buildUpDB();
 
 
         //Download the data from DB and put it to each data stores

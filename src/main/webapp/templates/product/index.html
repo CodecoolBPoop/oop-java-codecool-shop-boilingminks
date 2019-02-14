@@ -105,21 +105,20 @@
             <!-- Modal content -->
             <div class="modal-content">
                 <form action="/login" method="post">
-                <div class="modal-header">
-                    <h3>PLEASE SIGN IN</h3>
-                </div>
-                <div class="modal-body">
+                    <div class="modal-header">
+                        <h3>PLEASE SIGN IN</h3>
+                    </div>
+                    <div class="modal-body">
 
-                    <input id="email" name="email" type="email" placeholder="email address">
-                    <input name=password type="password" placeholder="password">
-                </div>
-                <div class="modal-footer">
+                        <input id="email" name="email" type="email" placeholder="email address">
+                        <input name=password type="password" placeholder="password">
+                    </div>
+                    <div class="modal-footer">
 
                         <button class="btn btn-success" type="submit" name="signin"><i class="far fa-check-circle"></i>
                         </button>
-
-                    <span class="close"></span>
-                </div>
+                        <span class="close"></span>
+                    </div>
                 </form>
             </div>
         </div>
@@ -130,20 +129,23 @@
     <div class="modal-dialog">
         <div class="fa-2x">
             <!-- Modal content -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>PLEASE SIGN UP</h3>
+            <form action="/registration" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>PLEASE SIGN UP</h3>
+                    </div>
+                    <div class="modal-body">
+                        <input name="email" type="email" placeholder="email address">
+                        <input name=password type="password" placeholder="password">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" type="submit" name="signup">
+                            <i class="far fa-check-circle"></i>
+                        </button>
+                        <span class="close"></span>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <input name="email" type="email" placeholder="email address">
-                    <input name=password type="password" placeholder="password">
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-success" type="submit" name="signup"><i class="far fa-check-circle"></i>
-                    </button>
-                    <span class="close"></span>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

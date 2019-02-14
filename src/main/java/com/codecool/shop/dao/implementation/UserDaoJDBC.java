@@ -13,7 +13,7 @@ public class UserDaoJDBC implements UserDao {
 
     private JdbcConnectivity JDBCInstance = JdbcConnectivity.getInstance();
 
-    private UserDaoJDBC(){
+    private UserDaoJDBC() {
     }
 
     public static UserDaoJDBC getInstance() {
@@ -35,9 +35,18 @@ public class UserDaoJDBC implements UserDao {
         List<User> users = getUserListFromHashMap(hashMaps);
         if (users.isEmpty()) {
             throw new IllegalArgumentException("email isn't found!");
-        }
-        else {
+        } else {
             return users.get(0);
+        }
+    }
+
+    @Override
+    public boolean isExistingEmail(String email) {
+        try {
+            instance.findByEmail(email);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
         }
     }
 
@@ -55,7 +64,7 @@ public class UserDaoJDBC implements UserDao {
         List<User> resultList = new ArrayList<>();
         for (HashMap<String, String> hashMap : hashMaps) {
             boolean isAdmin = false;
-            if(hashMap.get("is_admin").equals("t")){
+            if (hashMap.get("is_admin").equals("t")) {
                 isAdmin = true;
             }
             User user = new User(hashMap.get("first_name"), hashMap.get("last_name"), hashMap.get("email"),
