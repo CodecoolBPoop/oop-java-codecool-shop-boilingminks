@@ -2,6 +2,7 @@ package com.codecool.shop.model;
 
 public class User {
 
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
@@ -23,6 +24,22 @@ public class User {
         this.state = state;
         this.zip = zip;
         this.country = country;
+    }
+
+    public User(int id, String firstName, String lastName, String email, String hashedPassword, String address, String state, String zip, String country) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.hashedPassword = hashedPassword;
+        this.address = address;
+        this.state = state;
+        this.zip = zip;
+        this.country = country;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getEmail() {

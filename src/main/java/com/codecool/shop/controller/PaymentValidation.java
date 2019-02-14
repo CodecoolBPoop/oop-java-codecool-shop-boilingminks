@@ -1,5 +1,7 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.implementation.OrderDaoJDBC;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Transaction;
@@ -17,7 +19,7 @@ public class PaymentValidation extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        OrderDao orderDao = OrderDaoJDBC.getInstance();
         int userId = 1; // TODO: USER SYSTEM!
 
         HashMap<String, String> checkoutData = new HashMap<>();
@@ -26,12 +28,13 @@ public class PaymentValidation extends HttpServlet {
         });
         Transaction tran = new Transaction();
         Order.updateWithCheckout(checkoutData, tran);
-        Order.currentOrder.setTransaction(tran);
-        Order.currentOrder.saveToJson();
+        Order currentOrder = Order.currentOrder;
+        currentOrder.setTransaction(tran);
+        currentOrder.saveToJson();
 
         try{
-            String email = Order.currentOrder.getUser().getEmail();
-            String firstName = Order.currentOrder.getUser().getFirstName();
+            String email = currentOrder.getUser().getEmail();
+            String firstName = currentOrder.getUser().getFirstName();
 
             Emailer.mailTo(email, firstName);
         }
@@ -39,9 +42,11 @@ public class PaymentValidation extends HttpServlet {
             e.printStackTrace();
         }
 
-        Order.currentOrder.getShoppingCart().clear();
+        currentOrder.getShoppingCart().clear();
         ShoppingCartDaoMem.getInstance().getSumOfItems().clear();
         ShoppingCartDaoMem.getInstance().getSumOfItems().put(userId, 0);
+
+        orderDao.add(currentOrder);
 
         resp.sendRedirect("/");
 
