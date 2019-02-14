@@ -27,20 +27,20 @@ public class ProductDaoJDBC implements ProductDao {
     @Override
     public void add(Product product) {
         JDBCInstance.executeQuery("INSERT INTO product (name, description, price, currency, supplier_id, category_id, image_name)" +
-                                "VALUES ('" + product.getName() + "', '" + product.getDescription() + "', '" + product.getDefaultPrice() + "', '" + product.getDefaultCurrency() + "', '" + product.getSupplier().getId() + "', '" + product.getProductCategory().getId() + "', '" + product.getImageName() + "');");
+                "VALUES ('" + product.getName() + "', '" + product.getDescription() + "', '" + product.getDefaultPrice() + "', '" + product.getDefaultCurrency() + "', '" + product.getSupplier().getId() + "', '" + product.getProductCategory().getId() + "', '" + product.getImageName() + "');");
     }
 
     @Override
     public Product find(int id) {
         List<Product> productList = new ArrayList<>();
-        List<HashMap<String, String>> allProducts = JDBCInstance.executeQuerySelect("SELECT * FROM product WHERE id= '"+ Integer.toString(id) +"' ;");
+        List<HashMap<String, String>> allProducts = JDBCInstance.executeQuerySelect("SELECT * FROM product WHERE id= '" + Integer.toString(id) + "' ;");
         productListFromHasMap(productList, allProducts);
         return productList.get(0);
     }
 
     @Override
     public void remove(int id) {
-        JDBCInstance.executeQuery("REMOVE * FROM product WHERE id='"+ Integer.toString(id) +"' ;");
+        JDBCInstance.executeQuery("REMOVE * FROM product WHERE id='" + Integer.toString(id) + "' ;");
     }
 
     @Override
@@ -57,7 +57,7 @@ public class ProductDaoJDBC implements ProductDao {
         List<Product> resultList = new ArrayList<>();
         List<HashMap<String, String>> filteredProducts;
         filteredProducts = JDBCInstance.executeQuerySelect(
-                " SELECT * FROM product WHERE supplier_id ='" +  Integer.toString(suplierId) +"';"
+                " SELECT * FROM product WHERE supplier_id ='" + Integer.toString(suplierId) + "';"
         );
         productListFromHasMap(resultList, filteredProducts);
         return resultList;
@@ -86,14 +86,15 @@ public class ProductDaoJDBC implements ProductDao {
             resultList.add(tempProduct);
         }
     }
-    public void clear(){
+
+    public void clear() {
         String query = "TRUNCATE TABLE product CASCADE ;";
         JDBCInstance.executeQuery(query);
     }
 
-    public void addAll(ArrayList<Product> productDao){
+    public void addAll(ArrayList<Product> productDao) {
 
-        for (Product product:productDao) {
+        for (Product product : productDao) {
             this.add(product);
         }
     }
