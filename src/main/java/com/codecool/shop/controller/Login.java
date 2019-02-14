@@ -13,10 +13,7 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(true);
-        session.setAttribute("methodIUsed","it was get");
-        System.out.println("email prm from request: "+req.getParameter("email"));
-        session.setAttribute("email",req.getParameter("email"));
+
 
         System.out.println("get");
         resp.sendRedirect("/");
@@ -26,6 +23,20 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String username = req.getParameter("email");
+        String password = req.getParameter("password");
+
+
+
+        HttpSession session = req.getSession(true);
+        session.setAttribute("methodIUsed","it was get");
+        System.out.println("email prm from request: "+req.getParameter("email"));
+
+
+        session.setAttribute("email",req.getParameter("email"));
+        session.setAttribute("password",req.getParameter("password"));
+
 
         System.out.println("post");
         resp.sendRedirect("/");
