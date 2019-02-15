@@ -65,13 +65,9 @@ public class UserDaoJDBC implements UserDao {
         String stringUserId = String.valueOf(userId);
 
         JDBCInstance.executeQuery("UPDATE users SET " +
-                "first_name = '" + user.get("firstName") + "', '" +
-                "'last_name = '" + user.get("lastName") + "', '" +
-                "'address = '" + user.get("address") + ", '" +
-                "'state = '" + user.get("state") + "', '" +
-                "'zip = '" + user.get("zip") + "', '" +
-                "'country = '" + user.get("country") + "' '" +
-                "'WHERE id = '" + stringUserId + "';");
+                "first_name = '" + user.get("firstName") + "', " +
+                "last_name = '" + user.get("lastName") +
+                "' WHERE id = '" + stringUserId + "';");
     }
 
 
