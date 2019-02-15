@@ -54,7 +54,7 @@ public class CheckoutController extends HttpServlet {
         checkoutData.put("state", state);
         checkoutData.put("zip", zip);
         checkoutData.put("country", country);
-        userDao.updateUserTable(userId, checkoutData);
+        userDao.updateUserTable(userId, testUser);
 
         User user = new User();
         Order.updateWithCheckout(checkoutData, user);

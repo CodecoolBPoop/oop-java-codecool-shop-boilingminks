@@ -17,5 +17,5 @@ public interface UserDao {
 
     List<User> getAll();
 
-    void updateUserTable(int userId, HashMap<String, String> checkoutData);
+    void updateUserTable(int userId, User user);
 }

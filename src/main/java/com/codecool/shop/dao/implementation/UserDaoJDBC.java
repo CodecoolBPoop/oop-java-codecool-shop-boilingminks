@@ -61,12 +61,12 @@ public class UserDaoJDBC implements UserDao {
     }
 
     @Override
-    public void updateUserTable(int userId, HashMap<String, String> user) {
+    public void updateUserTable(int userId, User user) {
         String stringUserId = String.valueOf(userId);
 
         JDBCInstance.executeQuery("UPDATE users SET " +
-                "first_name = '" + user.get("firstName") + "', " +
-                "last_name = '" + user.get("lastName") +
+                "first_name = '" + user.getFirstName() + "', " +
+                "last_name = '" + user.getLastName() +
                 "' WHERE id = '" + stringUserId + "';");
     }
 
