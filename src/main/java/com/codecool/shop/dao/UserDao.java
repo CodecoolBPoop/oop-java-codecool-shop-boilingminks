@@ -2,6 +2,7 @@ package com.codecool.shop.dao;
 
 import com.codecool.shop.model.User;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface UserDao {
@@ -16,4 +17,5 @@ public interface UserDao {
 
     List<User> getAll();
 
+    void updateUserTable(int userId, HashMap<String, String> checkoutData);
 }

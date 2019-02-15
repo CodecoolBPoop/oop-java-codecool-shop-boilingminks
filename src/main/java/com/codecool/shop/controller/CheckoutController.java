@@ -8,11 +8,13 @@ import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -30,6 +32,8 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDao userDao = UserDaoJDBC.getInstance();
+        HttpSession session = req.getSession(false);
+        int userId = (int) session.getAttribute("userId");
 
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
@@ -50,6 +54,8 @@ public class CheckoutController extends HttpServlet {
         checkoutData.put("state", state);
         checkoutData.put("zip", zip);
         checkoutData.put("country", country);
+        userDao.updateUserTable(userId, checkoutData);
+
         User user = new User();
         Order.updateWithCheckout(checkoutData, user);
         Order.currentOrder = new Order();

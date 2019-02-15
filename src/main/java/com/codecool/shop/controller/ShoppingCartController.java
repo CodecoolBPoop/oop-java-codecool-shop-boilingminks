@@ -9,11 +9,13 @@ import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +31,8 @@ public class ShoppingCartController extends HttpServlet {
         Map<Product, Integer> cartData = new HashMap<>();
 
         String stringItemId = request.getParameter("changeCart");
+        HttpSession session = request.getSession(false);
+
 
         int userId = 1; // TODO: USER SYSTEM
         float sumOfPrices = 0;

@@ -34,7 +34,6 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     @Override
     public void update(int userId, int product_id, int quantity) {
 
-//        int userId = 1; // TODO : USER SYSTEM!
 
         if (shoppingCarts.containsKey(userId)) {
             sumOfItems.put(userId, sumOfItems.get(userId) + quantity);

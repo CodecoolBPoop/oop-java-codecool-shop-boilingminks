@@ -60,6 +60,21 @@ public class UserDaoJDBC implements UserDao {
         return null;
     }
 
+    @Override
+    public void updateUserTable(int userId, HashMap<String, String> user) {
+        String stringUserId = String.valueOf(userId);
+
+        JDBCInstance.executeQuery("UPDATE users SET " +
+                "first_name = '" + user.get("firstName") + "', '" +
+                "'last_name = '" + user.get("lastName") + "', '" +
+                "'address = '" + user.get("address") + ", '" +
+                "'state = '" + user.get("state") + "', '" +
+                "'zip = '" + user.get("zip") + "', '" +
+                "'country = '" + user.get("country") + "' '" +
+                "'WHERE id = '" + stringUserId + "';");
+    }
+
+
     private List<User> getUserListFromHashMap(List<HashMap<String, String>> hashMaps) {
         List<User> resultList = new ArrayList<>();
         for (HashMap<String, String> hashMap : hashMaps) {
@@ -67,11 +82,13 @@ public class UserDaoJDBC implements UserDao {
             if (hashMap.get("is_admin").equals("t")) {
                 isAdmin = true;
             }
-            User user = new User(Integer.parseInt(hashMap.get("id")),hashMap.get("first_name"), hashMap.get("last_name"), hashMap.get("email"),
+            User user = new User(Integer.parseInt(hashMap.get("id")), hashMap.get("first_name"), hashMap.get("last_name"), hashMap.get("email"),
                     hashMap.get("hashed_password"), hashMap.get("address"), hashMap.get("state"),
                     hashMap.get("zip"), hashMap.get("country"), isAdmin);
             resultList.add(user);
         }
         return resultList;
     }
+
+
 }

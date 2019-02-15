@@ -11,6 +11,7 @@ public abstract class SessionController {
         HttpSession session = req.getSession(true);
         session.setAttribute("email", email);
         session.setAttribute("userIsAdmin", user.is_admin());
+        session.setAttribute("userId", user.getId());
     }
 
     public static void destroySession(HttpServletRequest request){
